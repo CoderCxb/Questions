@@ -7,16 +7,10 @@
 </head>
 <body>
     <script>
-    function test(){
-        console.log(this);
-    }
-
-    let obj={
-        name:'xx'
-    };
-
-    obj.__proto__=test.prototype;
-    console.log(new test());
+    let result= setInterval(()=>{
+        console.log('xxx');
+    },1000);
+    console.log(result);
     </script>
 </body>
 </html>
