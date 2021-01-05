@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>防抖-debounce</title>
+    <style>
+        div{
+            width: 500px;
+            height: 500px;
+            background: #000;
+        }
+    </style>
+</head>
+<body>
+    <div id='box'></div>
+    <script>
+        function debounce(func, wait,immediate) {
+            let timer;
+            return function(){
+                let _this=this;
+                let event=Array.prototype.pop.call(arguments);
+                let args=arguments;
+                if(timer) clearTimeout(timer)
+                if(immediate){
+                    timer=setTimeout(function(){
+                        timer=null;
+                    },100)
+                    if(!timer) func.call(_this,event)
+                }else{
+                    timer=setTimeout(function(){
+                        func.call(_this,event)
+                    },wait)
+                }
+            }
+        }
+        document.getElementById('box').onmousemove=debounce(function(e){
+            console.log(this);
+            console.log(e);
+        },1000,true)
+    </script>
+</body>
+</html>

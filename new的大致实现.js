@@ -7,7 +7,7 @@ function myNew() {
     // 注意点:使用 [].shift.call是因为arguments是个类数组 不能直接使用数组的方法 所以使用[].shift.call 可以让类数组使用数组的方法
     var Constructor = [].shift.call(arguments);
 
-    // 3.改变obj的原型 obj有可能会返回 而且作为构造函数执行的this 
+    // 3.改变obj的原型 obj有可能会返回 而且是作为构造函数执行的this 
     obj.__proto__ = Constructor.prototype;
 
     // 4.执行构造函数 接收返回值 根据返回值的不同 new返回的参数也不同
@@ -19,6 +19,7 @@ function myNew() {
 function test(){
     console.log(this);
 }
+test.prototype.xxx='xxx'
 
 let t1=myNew(test);
 let t2=new test();

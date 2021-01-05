@@ -20,6 +20,7 @@ var object = {
     // 默认调用函数时 this指向的这个对象 即object 但是 这里返回了一个函数 
     // 这个函数和对象是没有关联的 因此这里的this指的是外部的globalThis
     getValueFunc1 : function(){
+        // 返回的是一个函数 在外部调用的时候 this指向的就是全局对象
 　　    return function(){
             return this.value;
 　　    };
@@ -35,3 +36,18 @@ var object = {
 
 console.log(object.getValueFunc1()());
 console.log(object.getValueFunc2()());
+
+// 常考题 
+// 因为 i是用var定义的 是全局变量
+// 因此 在for循环结束后 console.log(i)中的i是全局的i 是同一个
+var data = [];
+
+for (var i = 0; i < 3; i++) {
+    data[i] = function () {
+      console.log(i);
+    };
+  }
+  
+  data[0]();  // 3.
+  data[1]();  // 3
+  data[2]();  // 3
