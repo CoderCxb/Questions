@@ -1,43 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>防抖-debounce</title>
-    <style>
-        div{
-            width: 500px;
-            height: 500px;
-            background: #000;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
 </head>
 <body>
-    <div id='box'></div>
-    <script>
-        function debounce(func, wait,immediate) {
-            let timer;
-            return function(){
-                let _this=this;
-                let event=Array.prototype.pop.call(arguments);
-                let args=arguments;
-                if(timer) clearTimeout(timer)
-                if(immediate){
-                    timer=setTimeout(function(){
-                        timer=null;
-                    },100)
-                    if(!timer) func.call(_this,event)
-                }else{
-                    timer=setTimeout(function(){
-                        func.call(_this,event)
-                    },wait)
-                }
-            }
+  <div style="width: 500ppx;height: 500px;background: #000;" id="box"></div>
+  <script>
+    // 高频只能触发一次 要么延时前 要么延时后
+    function debounce(func,wait,immediate){
+      // 定时器 写在外部 给return的闭包使用
+      let timer;
+      function debounced(e){
+        // 定时器存在时 清除定时器
+        if(timer){
+          clearTimeout(timer);
         }
-        document.getElementById('box').onmousemove=debounce(function(e){
-            console.log(this);
-            console.log(e);
-        },1000,true)
-    </script>
+        // 立即执行
+        if(immediate){
+          // 需要在这里保存一下timer的存在情况  因为下面要赋值 
+          // 只有第
+          const canNow=!timer;
+          // 最重要的就在这 
+          // 其实就是延时执行 但是执行的内容为空 并且会自动清空自己
+          timer=setTimeout(function(){
+            // 需要情况timer 否则canNow会一直是false
+            timer=undefined;
+          },wait)
+          // 立即执行
+          if(canNow)func.call(this,e)
+        }else{
+          // 延时后执行
+          timer=setTimeout(function(){
+            func()
+          },wait)
+        }
+      }
+      // 取消 即清空定时器并置为undefined 
+      debounced.cancel=function(){
+        clearTimeout(timer);
+        timer=undefined;
+      }
+      return debounced;
+    }
+    document.getElementById('box').onmousemove=debounce(function(){
+      console.log('鼠标移动');
+    },1000,false)
+  </script>
 </body>
 </html>

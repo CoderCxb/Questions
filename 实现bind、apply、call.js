@@ -21,10 +21,9 @@ Function.prototype.myBind=function(context,...params1){
   let func=function(...params2){
     // 5.如果this是self的实例 说明使用了new关键字 因此返回this 否则不变
     context=this instanceof self?this:context;
-
     return context.fn(...params1,...params2);
   }
-  // 6. 让return的函数的原型和原函数保持
+  // 6. 让return的函数的原型和原函数保持一致
   func.prototype=self.prototype;
   return func;
 }
@@ -60,7 +59,6 @@ let obj={name:'marco'};
 // test.bind(obj,'1',2,true)('bindValue')
 // @ts-ignore
 // test.myBind(obj,'1',2,true)('bindValue')
-
 let b1=test.myBind(obj,'1',2,true);
 let b2=test.bind(obj,'1',2,true)
 new b1();
