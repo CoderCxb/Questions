@@ -1,3 +1,5 @@
-console.log(111);
-return 
-console.log(222);
+let obj={name:'marco'};
+
+let {name:xxx}={name:'marco'};
+
+console.log(xxx);
