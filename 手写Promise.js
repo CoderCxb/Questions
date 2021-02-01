@@ -1,25 +1,72 @@
 const FULFILLED = 'fulfilled';
 const PENDING = 'pending';
 const REJECTED = 'rejected';
-class Promise {
+const resolvePromise = (promise2, x, resolve, reject) => {
+	// 自己等待自己完成是错误的实现，用一个类型错误，结束掉 promise  Promise/A+ 2.3.1
+	if (promise2 === x) {
+		return reject(
+			new TypeError('Chaining cycle detected for promise #<Promise>')
+		);
+	}
+	// Promise/A+ 2.3.3.3.3 只能调用一次
+	let called;
+	// 后续的条件要严格判断 保证代码能和别的库一起使用
+	if ((typeof x === 'object' && x != null) || typeof x === 'function') {
+		try {
+			// 为了判断 resolve 过的就不用再 reject 了（比如 reject 和 resolve 同时调用的时候）  Promise/A+ 2.3.3.1
+			let then = x.then;
+			if (typeof then === 'function') {
+				// 不要写成 x.then，直接 then.call 就可以了 因为 x.then 会再次取值，Object.defineProperty  Promise/A+ 2.3.3.3
+				then.call(
+					x,
+					(y) => {
+						// 根据 promise 的状态决定是成功还是失败
+						if (called) return;
+						called = true;
+						// 递归解析的过程（因为可能 promise 中还有 promise） Promise/A+ 2.3.3.3.1
+						resolvePromise(promise2, y, resolve, reject);
+					},
+					(r) => {
+						// 只要失败就失败 Promise/A+ 2.3.3.3.2
+						if (called) return;
+						called = true;
+						reject(r);
+					}
+				);
+			} else {
+				// 如果 x.then 是个普通值就直接返回 resolve 作为结果  Promise/A+ 2.3.3.4
+				resolve(x);
+			}
+		} catch (e) {
+			// Promise/A+ 2.3.3.2
+			if (called) return;
+			called = true;
+			reject(e);
+		}
+	} else {
+		// 如果 x 是个普通值就直接返回 resolve 作为结果  Promise/A+ 2.3.4
+		resolve(x);
+	}
+};
+class MyPromise {
 	status = PENDING;
 	value = undefined;
 	reason = undefined;
 	onResolvedCallback = [];
 	onRejectedCallback = [];
 	constructor(executor) {
-		function resolve(value) {
+		let resolve = (value) => {
 			this.status = FULFILLED;
 			this.value = value;
-			this.onResolvedCallback.forEach((fn) => fn(self.value));
-		}
-		function reject(reason) {
+			this.onResolvedCallback.forEach((fn) => fn(this.value));
+		};
+		let reject = (reason) => {
 			if (this.status === PENDING) {
 				this.reason = reason;
 				this.status = REJECTED;
 				this.onRejectedCallback.forEach((fn) => fn(this.reason));
 			}
-		}
+		};
 		try {
 			executor(resolve, reject);
 		} catch (err) {
@@ -27,113 +74,56 @@ class Promise {
 		}
 	}
 	then(onFulfilled, onRejected) {
-		let promise = new Promise(function () {
+		onFulfilled = typeof onFulfilled === 'function' ? onFulfilled : (v) => v;
+		onRejected =
+			typeof onRejected === 'function'
+				? onRejected
+				: (err) => {
+						throw err;
+				  };
+		let promise = new MyPromise((resolve, reject) => {
 			if (this.status === FULFILLED) {
-				onFulfilled(this.value);
-				// self.onResolvedCallback.forEach((fn) => fn(self.value));
+				let result = onFulfilled(this.value);
+				// console.log(result);
+				// this.onResolvedCallback.push(resolve.bind(this, result));
+				// this.onResolvedCallback.forEach((fn) => fn(this.value));
+				resolve(result);
 			}
-			if (self.status === REJECTED) {
-				onRejected(this.reason);
-				// self.onRejectedCallback.forEach((fn) => fn(self.reason));
+			if (this.status === REJECTED) {
+				// let result = onRejected(this.reason);
+				// console.log(result);
+				// this.onRejectedCallback.push(reject.bind(this, result));
+				// this.onRejectedCallback.forEach((fn) => fn(this.reason));
+				reject(this.reason);
 			}
 			if (this.status === PENDING) {
-				this.onResolvedCallback.push(() => {
-					onFulfilled(this.value);
-				});
+				// this.onResolvedCallback.push(() => {
+				resolve(result);
+				// });
 				this.onRejectedCallback.push(() => {
-					onRejected(this.reason);
+					reject(this.reason);
 				});
 			}
 		});
 		return promise;
 	}
-}
-function MyPromise(executor) {
-	var self = this;
-	self.status = PENDING;
-	self.value = undefined;
-	self.reason = undefined;
-	self.onResolvedCallback = [];
-	self.onRejectedCallback = [];
-	function resolve(value) {
-		if (self.status === PENDING) {
-			self.status = FULFILLED;
-			self.value = value;
-			self.onResolvedCallback.forEach((fn) => fn(self.value));
-		}
+	catch(onReject) {
+		onReject(this.reason);
 	}
-
-	function reject(reason) {
-		if (self.status === PENDING) {
-			self.reason = reason;
-			self.status = REJECTED;
-			self.onRejectedCallback.forEach((fn) => fn(self.reason));
-		}
-	}
-	try {
-		executor(resolve, reject);
-	} catch (err) {
-		reject(err);
-	}
-	MyPromise.prototype.then = function (onFulfilled, onRejected) {
-		try {
-			var self = this;
-			var promise = new MyPromise(function (resolve, reject) {
-				if (self.status === FULFILLED) {
-					onFulfilled(self.value);
-					// self.onResolvedCallback.forEach((fn) => fn(self.value));
-				}
-				if (self.status === REJECTED) {
-					onRejected(self.reason);
-					// self.onRejectedCallback.forEach((fn) => fn(self.reason));
-				}
-				if (self.status === PENDING) {
-					self.onResolvedCallback.push(() => {
-						onFulfilled(self.value);
-					});
-					self.onRejectedCallback.push(() => {
-						onRejected(self.reason);
-					});
-				}
-			});
-			return promise;
-		} catch (reason) {
-			this.reason = reason;
-		}
-	};
-	MyPromise.prototype.catch = function (onRejected) {
-		if (self.status === REJECTED) {
-			return new MyPromise(function (resolve, reject) {
-				onRejected(self.reason);
-				// reject(self.reason);
-			});
-		}
-	};
 }
 
 let p = new MyPromise(function (resolve, reject) {
-	console.log('直接执行的代码');
 	// setTimeout(() => {
-	// 	console.log('setTimeout');
-	// });
-	setTimeout(() => {
-		resolve(0);
-	}, 0);
-	// reject('error');
-});
-
-let p2 = new Promise(function (resolve, reject) {
-	setTimeout(() => {
-		resolve(0);
-	}, 0);
+	// console.log('test');
+	resolve(0);
+	// }, 0);
 });
 p.then((data) => {
 	console.log(data);
-	return 100;
+	return 'AAA';
 })
 	.then((data) => {
 		console.log(data);
-		return 200;
 	})
 	.catch((err) => {
 		console.log(err);
