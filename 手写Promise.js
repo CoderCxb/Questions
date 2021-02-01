@@ -83,53 +83,66 @@ class MyPromise {
 				  };
 		let promise = new MyPromise((resolve, reject) => {
 			if (this.status === FULFILLED) {
-				let result = onFulfilled(this.value);
 				// console.log(result);
 				// this.onResolvedCallback.push(resolve.bind(this, result));
 				// this.onResolvedCallback.forEach((fn) => fn(this.value));
-				resolve(result);
+				setTimeout(() => {
+					let result = onFulfilled(this.value);
+					// console.log('promise:', promise);
+					// console.log('result:', result);
+					resolve(result);
+				});
 			}
 			if (this.status === REJECTED) {
 				// let result = onRejected(this.reason);
 				// console.log(result);
 				// this.onRejectedCallback.push(reject.bind(this, result));
 				// this.onRejectedCallback.forEach((fn) => fn(this.reason));
-				reject(this.reason);
+				setTimeout(() => {
+					let result = reject(this.reason);
+					// resolve(result);
+				});
 			}
 			if (this.status === PENDING) {
-				// this.onResolvedCallback.push(() => {
-				resolve(result);
-				// });
+				this.onResolvedCallback.push(() => {
+					setTimeout(() => {
+						let result = onFulfilled(this.value);
+						resolve(result);
+					});
+				});
 				this.onRejectedCallback.push(() => {
-					reject(this.reason);
+					setTimeout(() => {
+						reject(this.reason);
+					});
 				});
 			}
 		});
 		return promise;
 	}
 	catch(onReject) {
-		onReject(this.reason);
+		if (this.status === REJECTED) {
+			onReject(this.reason);
+		}
 	}
 }
 
 let p = new MyPromise(function (resolve, reject) {
 	// setTimeout(() => {
 	// console.log('test');
-	resolve(0);
+	resolve('OK');
 	// }, 0);
 });
 p.then((data) => {
 	console.log(data);
-	return 'AAA';
-})
-	.then((data) => {
-		console.log(data);
-	})
-	.catch((err) => {
-		console.log(err);
-	});
+	return 'Nice';
+}).then((data) => {
+	console.log(data);
+});
+// .catch((err) => {
+// 	console.log('err:', err);
+// });
 // .then((data) => {
 // 	console.log(data);
 // });
-
+console.log('ASYNC');
 // let p3 = p2.then((value) => 100).then((value) => console.log(value));
