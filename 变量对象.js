@@ -22,3 +22,13 @@ console.log(foo);
 // console.log(foo);
 // foo = 1; 
 // console.log(foo);
+
+
+// 未声明的变量 会被添加到全局对象上(即便它在很里层定义的)
+function test(){
+    return function(){
+        hint="OK";
+    }
+}
+test()();
+console.log(hint);  // OK 

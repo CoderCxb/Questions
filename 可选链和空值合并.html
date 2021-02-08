@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+		// 空值合并运算符 找出第一个非undefined和null的值
+		let num1,num2=10;
+		console.log(num1??num2);
+
+		let p='property';
+		let obj = {
+			name:"marco",
+			[p]:'value',
+			run(){
+				console.log('跑步');
+			},
+		};
+		// 可选链
+		// 1. ?.
+		console.log(obj?.name);
+		// 2. ?.[]
+		console.log(obj?.[p]);
+		// 3. ?.()
+		obj?.run()
+    </script>
+</body>
+</html>
