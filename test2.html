@@ -6,11 +6,10 @@
     <title>Document</title>
 </head>
 <body>
-    <script>
-        let xhr=new XMLHttpRequest()
-        xhr.open('get','http://localhost:666',true)
-        xhr.setRequestHeader('origin','*')
-        xhr.send(null)
-    </script>
+   <script>
+     window.onmessage=function(e){
+         console.log(e);
+     }
+   </script>
 </body>
 </html>
