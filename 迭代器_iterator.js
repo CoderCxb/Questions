@@ -18,3 +18,10 @@ console.log(iterator.next());
 console.log(iterator.next());
 console.log(iterator.next());
 console.log(iterator.next());
+
+// 字符串是有迭代器的 因此可以使用... 也可以遍历
+let str='Hello'
+// console.log(...str);
+// for(let i=0;i<5;i++){
+//     console.log(i);
+// }

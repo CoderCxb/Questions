@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+        // 1. Global对象
+
+        // 1.1 全局方法encodeURI和encodeURIComponent
+        // 它们的区别在于，encodeURL()不会对本身属性url的特殊字符进行编码，例如“冒号、正斜杠、问号、井号”；而encodeURLComponent()则会对它发现的任何非标准字符进行编码
+        let uri  ='http:// baidu.com';
+        console.log(encodeURI(uri));
+        console.log(encodeURIComponent(uri));
+        console.log(decodeURI('http://%20baidu.com'));
+        console.log(decodeURIComponent('http%3A%2F%2F%20baidu.com'));
+
+        // 1.2 eval方法
+        let str='OK'
+        // eval中类似块级作用域 如果使用过let或者const修饰的变量 外部是无法访问的
+        eval("var num=0;console.log(str)")
+        console.log(num);
+
+        // 1.3 Global对象属性
+        // undefined NaN Infinity Object Array Function Boolean String Number Date Error EvalError RegExp Symbol 
+
+        // 1.4 window对象
+        // 虽然ECMA没有规定直接访问Global对象的方式 但是浏览器将window对象实现为Global对象的代理 所有在全局声明的变量(var定义的)和函数都变成了 window的属性
+        let v1='value1';
+        var v2='value2';
+        console.log(window.v1,window.v2)
+    </script>
+</body>
+</html>
