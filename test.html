@@ -6,11 +6,12 @@
     <title>Document</title>
 </head>
 <body>
+    <input type="file" id="file">
     <script>
-        let xhr=new XMLHttpRequest()
-        xhr.open('get','http://localhost:666',true)
-        xhr.setRequestHeader('origin','*')
-        xhr.send(null)
+     let ab = new ArrayBuffer(10);
+     let u8=new Uint8Array(ab)
+     console.log(u8);
+     console.log(JSON.stringify({data:u8}));
     </script>
 </body>
 </html>
