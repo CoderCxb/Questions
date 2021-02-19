@@ -1,24 +1,26 @@
-var colors = ["red", "green", "blue"];
+var colors = ['red', 'green', 'blue'];
+// 可以通过打印Symbol.iterator来查看是否实现了迭代器函数
+console.log(colors[Symbol.iterator]());
 // 数组默认是有一个Symbol.iterator属性 因此可以遍历 想要修改遍历的结果 可以修改迭代器
 console.log(Symbol.iterator);
-colors['myIterator'] = function() {
-    let index=0;
-    return {
-        next(){
-            return {
-                done:index===colors.length,
-                value:colors[index++]
-            }
-        }
-    };
+colors['myIterator'] = function () {
+	let index = 0;
+	return {
+		next() {
+			return {
+				done: index >= colors.length,
+				value: colors[index++],
+			};
+		},
+	};
 };
 // let iterator=colors[Symbol.iterator]();
-let iterator=colors['myIterator']();
+let iterator = colors['myIterator']();
 console.log(iterator.next());
 console.log(iterator.next());
 console.log(iterator.next());
 console.log(iterator.next());
-
+ 
 // 字符串是有迭代器的 因此可以使用... 也可以遍历
 let str='Hello'
 // console.log(...str);
