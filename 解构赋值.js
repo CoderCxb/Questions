@@ -53,3 +53,13 @@ function doSomething({ who = 'I', doing = 'speaking', what = 'chinse' } = {}) {
 	console.log(`${who} ${doing} ${what}`); // I speaking chinse
 }
 doSomething();
+
+// 9. 解构并不要求必须在声明表达式中 即可以先声明变量 然后再通过解构赋值
+//  注意：需要使用()包裹
+let book={
+	title:'Javascript',
+	verison:4
+}
+let {title}=book;
+let version;
+({version}=book);
