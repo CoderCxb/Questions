@@ -36,7 +36,12 @@ console.log([] instanceof Array);                // true
 
 console.log('------------------------------------------------------');
 
-// 4. window对象的判断
+// 4. 使用 prototype.isPrototypeOf()方法判断类型
+console.log(Array.prototype.isPrototypeOf([]));  // true
+console.log(Array.prototype.isPrototypeOf({}));  // false
+
+console.log('------------------------------------------------------');
+// 5. window对象的判断
 function isWindow( obj ) {
     // 在浏览器中全局对象是window
     return obj != null && obj === obj.window;
