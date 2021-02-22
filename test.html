@@ -6,12 +6,13 @@
     <title>Document</title>
 </head>
 <body>
-    <input type="file" id="file">
-    <script>
-     let ab = new ArrayBuffer(10);
-     let u8=new Uint8Array(ab)
-     console.log(u8);
-     console.log(JSON.stringify({data:u8}));
+        <input type="file" id="file">
+        <img />
+    <script>    
+        document.getElementById("file").onchange=function(event){
+          console.log('???',window.URL.createObjectURL(event.target.files[0]));
+          document.getElementsByTagName('img')[0].src=window.URL.createObjectURL(event.target.files[0]);
+        }
     </script>
 </body>
 </html>

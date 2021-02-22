@@ -1,9 +1,15 @@
-function test() {
-	console.log(test);
-	console.log(test.caller);
-	console.log(arguments.callee);
-}
-test();
+let obj = {};
+Object.defineProperty(obj, 'name', {
+	value: 'marco',
+	writable: false,
+});
 
-let file = new File([], 'aaa.txt');
-const fi;
+Object.seal(obj);
+
+console.log(Object.getOwnPropertyDescriptor(obj, 'name'));
+// obj.name = 'xxx';
+Object.defineProperty(obj, 'name', {
+	value: 'polo',
+	writable: true,
+});
+console.log(Object.getOwnPropertyDescriptor(obj, 'name'));
