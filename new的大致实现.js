@@ -5,6 +5,8 @@ function myNew() {
 	var obj = new Object();
 	// 2. 接收并且删除arguments的第一个参数 第一个参数是构造函数 剩下的就是普通的参数
 	// 注意点:使用 [].shift.call是因为arguments是个类数组 不能直接使用数组的方法 所以使用[].shift.call 可以让类数组使用数组的方法
+	// 也可以使用解构赋值 
+	// let [Constructor,...args]=arguments 
 	var Constructor = [].shift.call(arguments);
 
 	// 3.改变obj的原型 obj有可能会返回 而且是作为构造函数执行的this
