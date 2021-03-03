@@ -81,3 +81,7 @@ function myInstanceOf(instance, constructor) {
 
 console.log(myInstanceOf('1', String));
 console.log(myInstanceOf(function () {}, Function));
+
+
+// 7. 判断是否是原型 除了用instanceOf以外  还可以
+console.log(Object.prototype.isPrototypeOf({}));
