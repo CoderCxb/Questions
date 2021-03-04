@@ -64,8 +64,9 @@ function myInstanceOf(instance, constructor) {
 		instance === undefined ||
 		instance === null ||
 		(typeof instance !== 'object' && typeof instance !== 'function')
-	)
+	) {
 		return false;
+	}
 	// 获取实例的原型
 	let proto = Object.getPrototypeOf(instance);
 	// 通过循环实现原型链向上查询
@@ -79,9 +80,8 @@ function myInstanceOf(instance, constructor) {
 	return false;
 }
 
-console.log(myInstanceOf('1', String));
+console.log(myInstanceOf({}, Object));
 console.log(myInstanceOf(function () {}, Function));
-
 
 // 7. 判断是否是原型 除了用instanceOf以外  还可以
 console.log(Object.prototype.isPrototypeOf({}));

@@ -1,1 +1,1 @@
-console.log([1, 2, 3].findIndex());
+console.log(typeof Number);

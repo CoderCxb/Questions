@@ -101,7 +101,7 @@ function clone(target, map = new WeakMap()) {
 	const type = getType(target);
 	let cloneTarget;
 	if (deepTag.includes(type)) {
-		cloneTarget = getInit(target, type);
+		cloneTarget = getInit(target);
 	} else {
 		return cloneOtherType(target, type);
 	}
@@ -139,6 +139,13 @@ function clone(target, map = new WeakMap()) {
 
 	return cloneTarget;
 }
+
+let obj = {
+	name: 'info',
+	run: function () {
+		console.log('???');
+	},
+};
 
 module.exports = {
 	clone,
