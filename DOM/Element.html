@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Element</title>
+  <style>
+    div{width: 100px;height: 100px;}
+    #box1{
+      background: red;
+    }
+    #box2{
+      background: blue;
+    }
+  </style>
+</head>
+<body>
+  <div id="box1" style="color: yellow;" onclick="test()" class="btn"></div>
+  <script>
+    function test(){
+      console.log('测试');
+    }
+    let element=document.getElementById('box1'); 
+    console.log('Element.nodeType', element.nodeType); // 1
+    console.log('标签名',element.nodeName,element.tagName);// 'DIV' 默认大写
+    console.log('nodeValue',element.nodeValue);        // null
+    // 属性不区分大小写 自定义属性可以以data-开头 便于区分
+    console.log('获取拥有的属性-getAttributeNames:',element.getAttributeNames());
+    setTimeout(()=>{element.setAttribute("id",'box2')},1000)
+    console.log('获取属性-getAttribute:',element.getAttribute('id'));
+    console.log('获取内联style:',element.getAttribute('style'));  // 鸡肋
+    console.log('获取绑定事件onclick:',element.getAttribute('onclick')); // 鸡肋
+    element.removeAttribute('class')
+  </script>
+</body>
+</html>

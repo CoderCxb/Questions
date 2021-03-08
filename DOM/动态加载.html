@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>动态加载</title>
+  <!-- <link rel="stylesheet" href="index.css"> -->
+</head>
+<body>
+  <script>
+    let script=document.createElement('script');
+    script.src='log.js';
+    // 或者
+    // script.text="console.log('OK')" // 相当于把代码传给 eval()
+    document.body.appendChild(script);
+
+    let link=document.createElement('link');
+    link.rel='stylesheet';
+    link.href='index.css';
+    console.log(link);
+    document.head.appendChild(link);
+  </script>
+</body>
+</html>

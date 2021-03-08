@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Text</title>
+</head>
+<body>  
+  <div id="box"></div>
+  <script>
+    let box=document.querySelector('#box')
+    let text=document.createTextNode('数据');
+    box.append(text)
+    // text节点没有子节点 代码中的连在一起的字符串(包括空格) 一般来说 算一个text节点
+    // 不一般的情况就是 手动创建了text节点并插入 
+    // 使用normalize()方法可以合并连接在一起的text节点
+    console.log('nodeType:',text.nodeType); // 3
+    console.log('nodeName:',text.nodeName); // #text
+    console.log('nodeValue:',text.nodeValue,text.data); // 数据
+    text.insertData(0,'___'); // 插入
+    text.appendData("...");   // 追加
+    text.deleteData(0,1);     // 删除
+    text.replaceData(0,1,'!'); // 替换
+    console.log(text.substringData(0,5)); // 截取 不改变text 
+
+  </script>
+</body>
+</html>

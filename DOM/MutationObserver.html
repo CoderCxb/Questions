@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MutationObserver</title>
+</head>
+<body>
+  <div id="box"></div>
+  <div id="pen"></div>
+  <script>
+    let box=document.querySelector('#box')
+    let pen=document.querySelector('#pen')
+    let observer=new MutationObserver((mutationRecords,mutationObserver)=>{
+      // addedNodes: NodeList []  
+      // attributeName: "id"
+      // attributeNamespace: null
+      // nextSibling: null
+      // oldValue: "box"
+      // previousSibling: null
+      // removedNodes: NodeList []
+      // target: div#box1    //  被修改影响的目标节点
+      // type: "attributes"  //  字符串 表示变化的类型:attributes,characterData,childList
+      console.log(mutationRecords.map(x=>x.target));
+
+      // mutationObserver 为MutationObserver实例对象 即observer本身
+      // setTimeout(()=>{
+        // mutationObserver.disconnect(); //取消所有监听
+      // },5000)
+    })
+    // 可以监听的类型有三种 attributes,characterData,childList
+    // oldValue默认为null，想要之前的值 
+    // attributes需要设置attributeOldValue:true
+    // attributeFilter为白名单 即需要监听的属性
+    // characterData需要设置characterDataOldValue:true
+    observer.observe(box,{attributes:true,attributeOldValue:true,attributeFilter:['id']})
+    // 可以监听多个节点
+    observer.observe(pen,{attributes:true,attributeOldValue:true})
+    // 如果监听的是childList，即便子节点被移出，仍然能够触发监听事件
+    box.id='box1';
+    console.log(observer.takeRecords());  // 清空记录队列并返回其中所有MutationObserver实例
+  </script>
+</body>
+</html>
