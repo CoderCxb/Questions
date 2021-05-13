@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>事件</title>
+</head>
+<body>
+  <script>
+    // 如果只是使用一次以后就不再使用的事件 使用完可以值空(null)
+
+    // 1.事件冒泡:从内向外触发元素事件
+    // 2.事件捕获:从外向内触发元素事件
+    // 3.事件流:事件捕获->到达目标->事件冒泡 
+    // 第三个参数：true捕获阶段调用  false冒泡阶段调用
+    function log(event){
+      console.log('OK');
+      event.preventDefault();  // 阻止默认事件
+      event.stopPropagation(); // 阻止事件冒泡/捕获
+    }
+    document.addEventListener('click',log,true)
+    document.removeEventListener('click',log)
+    window.onload=function(){
+      console.log('load会在整个页面所有外部资源加载完成后触发');
+    }
+    window.onunload=function(){
+      console.log('unload会在页面卸载后触发');
+    }
+    window.onresize=function(){
+      console.log('调整页面大小时触发');
+    }
+    window.onscroll=function(){
+      console.log('页面滚动时触发');
+    }
+    window.oncontextmenu=function(){
+      console.log('右键菜单');
+    }
+    window.onhashchange=function(){
+      console.log('hash改变');
+    }
+
+  </script>
+</body>
+</html>

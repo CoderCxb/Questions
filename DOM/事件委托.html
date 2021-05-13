@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>事件委托</title>
+</head>
+<body>
+  <div id="box">盒子模型</div>
+  <script>
+    // 事件委托:将子元素的事件委托给document这样的上级元素
+    // 优点:
+    // 1.document这样的上级元素随机可用，任何时候都可以给他添加事件处理。
+    // 2.可以将处理函数统一写在一起 方便管理 节省时间
+    // 3.主要还是减少整个页面的内存,提高性能 
+    document.onclick=function(event){
+      let target=event.target;
+      if(target.id==='box'){
+        console.log('点击盒子');
+      }
+    }
+  </script>
+</body>
+</html>

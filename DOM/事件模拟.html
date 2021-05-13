@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>事件模拟</title>
+  <style>
+    #box{width: 100px;height: 100px; background: yellow;}
+  </style>
+</head>
+<body>
+  <div id="box">
+    盒子
+  </div>
+  <button id="kb">模拟键盘</button>
+  <script>
+    // 可以通过创建Event并dispatchEvent来模拟事件
+    let box=document.getElementById('box')
+    let kb=document.getElementById('kb')
+    box.onclick=function(event){
+      console.log('鼠标点击',event);
+    }
+    // 1.模拟鼠标事件
+    let mouseEvent=document.createEvent("MouseEvent");
+    // 事件直接使用 element.disptchEvent(mouseEvent)触发
+    // 接收的参数中的位置 仅仅只是在监听函数中显示 并不是真实点击的位置 
+    // 真实点击的位置还是挂载的元素
+    mouseEvent.initMouseEvent('click',true,true,document.defaultView,0,100,100,100,100,false,false,false,false,0,null);
+    box.dispatchEvent(mouseEvent)
+
+    // 2.模拟键盘事件
+    // let keyEvent=document.createEvent("KeyboardEvent");
+    let keyboardEvent=new KeyboardEvent('',{
+        key:'v',
+        ctrlKey:true
+    });
+    keyboardEvent.initEvent('keydown')
+    document.onkeydown=function(e){
+      console.log('按下键盘',e);
+    }
+    kb.onclick=function(){
+      document.dispatchEvent(keyboardEvent)
+    }
+  </script>
+</body>
+</html>
