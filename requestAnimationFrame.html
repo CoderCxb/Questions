@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>requestAnimationFrame</title>
+</head>
+<body>
+  <script>
+    // 1. requestAnimationFrame
+    // 传入一个回调函数作为参数，该回调函数会在浏览器下一次重绘之前执行
+    // 默认情况下,requestAnimationFrame只会执行一次，若你想在浏览器下次重绘之前继续更新下一帧动画，那么回调函数自身必须再次调用requestAnimationFrame()（回调函数的执行次数通常为每秒60次,60帧）
+    // 运行在后台标签页或隐藏的iframe时，会被暂停
+    // 2. requestAnimationFrame返回requestId，这个id用于取消。
+    // 3. cancelAnimationFrame(requestId)即可取消
+    let requestId;
+    function log(){
+      requestId=requestAnimationFrame(()=>{
+        console.log(new Date());
+        log();
+      })
+    }
+    log()
+    setTimeout(()=>{
+      cancelAnimationFrame(requestId)
+    },5000)
+  </script>
+</body>
+</html>
