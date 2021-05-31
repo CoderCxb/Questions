@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Comment</title>
+</head>
+<body>
+  <div id="box"></div>
+  <script>
+    // 注释节点
+    let box=document.querySelector('#box')
+    let comment=document.createComment('comment节点');
+    box.append(comment)
+    console.log('注释节点-nodeType:',comment.nodeType);
+    console.log('注释节点-nodeName:',comment.nodeName);
+    console.log('注释节点内容-nodeValue:',comment.data,comment.nodeValue);
+  </script>
+</body>
+</html>

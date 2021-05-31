@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>cookie</title>
+</head>
+<body>
+  <script>
+    // 1. cookie存储在客户端
+    // 2. cookie与特定域绑定
+    // 3. 服务器通过响应头 Set-Cookie:name=value 的形式设置cookie
+
+    // cookie的限制
+    // 1.不超过300个cookie
+    // 2.每个cookie不超过4096字节(4KB)
+    // 3.每个域不超过20个cookie
+    // 4.每个域不超过81920字节
+
+    // cookie的构成
+    // name             名称     不区分大小写
+    // value             值    
+    // domain            域      cookie生效的域
+    // path             路径     url包含这个路径才会把cookie发送到服务器
+    // expire/max-age  过期时间  何时删除cookie的时间戳
+    // httponly       HttpOnly属性指定该 Cookie 无法通过 JavaScript 脚本拿到，主要是Document.cookie属性、XMLHttpRequest对象和 Request API 都拿不到该属性。这样就防止了该 Cookie 被脚本读到，只有浏览器发出 HTTP 请求时，才会带上该 Cookie。 
+    // Secure属性指定浏览器只有在加密协议 HTTPS 下，才能将这个 Cookie 发送到服务器。另一方面，如果当前协议是 HTTP，浏览器会自动忽略服务器发来的Secure属性。该属性只是一个开关，不需要指定值。如果通信是 HTTPS 协议，该开关自动打开。
+    document.cookie='name=marco';
+    console.log('浏览器是否开启cookie:',navigator.cookieEnabled);     
+    console.log('当前网页的cookie:',document.cookie);
+  </script>
+</body>
+</html>

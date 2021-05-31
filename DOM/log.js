@@ -1,0 +1,1 @@
+console.log('log:外部文件');

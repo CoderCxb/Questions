@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blob</title>
+</head>
+<body>
+  <script>
+    // File对象提供slice方法 返回裁剪的Blob实例
+    // Blob实际上是File的超类
+    // Blob表示 二进制大对象,是JS中对不可修改二进制数据的封装类型
+    // 包含字符串的数组 ArrayBuffer ArrayBufferView,甚至其他Blob都可以用来创建Blob
+    // 并且可以接收option参数 指定MIME类型 
+    // size:大小  type:MIME类型  arrayBuffer
+    // slice() 切割    stream() 流数据   text() 返回一个promise 获取文本内容
+    console.log(new Blob([1,2,3],{type:'application/json'}));
+
+    // URL和Blob 
+    // URL.createObjectURL创建URL对象 可在DOM中直接使用
+    let url=URL.createObjectURL(new Blob([1,2,3]));
+    console.log(url);
+    // 释放内存(对象在使用的时候 就无法释放内存) 建议不再使用时 直接释放
+    URL.revokeObjectURL(url); 
+  </script>
+</body>
+</html>

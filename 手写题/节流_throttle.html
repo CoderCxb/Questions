@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>防抖-debounce</title>
+    <style>
+        div{
+            width: 500px;
+            height: 500px;
+            background: #000;
+        }
+    </style>
+</head>
+<body>
+    <div id='box'></div>
+    <script>
+        function throttle(func, wait, options) {
+            let timer,lastCallTime=0;
+            throttled = function(e){
+            throttled.cancel = function() {
+                clearTimeout(timeout);
+                previous = 0;
+                timeout = undefined;
+            }
+                // 存储返回函数的this  以防止this在setTimeout中发生改变
+                let context=this;
+                // 获取当前时间
+                let now = +new Date();
+                // 获取当前时间和上一次执行的时间的时间差和wait的时间差
+                let remaining=wait-(now-lastCallTime);
+                // 清除定时器
+                if(timer){
+                    clearTimeout(timer)
+                    timer=undefined;
+                }
+                // remaining<=0  距离上一次执行时间超过了wait
+                // options.leading 是否立即执行
+                if(remaining<=0&&options.leading){
+                    // 设置最新执行时间
+                    lastCallTime=now;
+                    // 执行函数并绑定context 传递参数
+                    func.call(context,e)
+                    // 定时器不存在 并且延迟执行
+                }else if(!timer&&options.trailing){
+                    // 设置定时器
+                    timer=setTimeout(function(){
+                        // 设置最新执行时间
+                        lastCallTime=now;
+                        // 置timer为undefined
+                        timer=undefined;
+                        // 执行函数并绑定context 传递参数
+                        func.call(context,e)
+                    },wait)
+                }
+            }
+            // 返回节流函数
+            return throttled;
+        }
+        document.getElementById('box').onmousemove=throttle(function(e){
+            console.log(this);
+            console.log(e);
+        },1000,{leading:true,trailing:true})
+    </script>
+</body>
+</html>

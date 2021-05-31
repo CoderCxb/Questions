@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div class="box">盒子</div>
+  <script>
+    console.log('document.nodeType:', document.nodeType)
+    console.log('document.nodeName:', document.nodeName)
+    console.log('document.nodeValue:', document.nodeValue)
+    console.log('document.parentNode:', document.parentNode)
+    console.log('document中聚焦的元素:',document.activeElement,);
+    // html元素 等价于firstChild和childNodes[0]
+    console.log('html元素:', document.documentElement) 
+    console.log('head元素:',document.head);
+    console.log('body元素:', document.body)
+    document.title='new document'; // 修改标题
+    console.log('title:',document.title);
+    console.log('域名:',document.domain);  
+    console.log('URL:', document.URL)
+    console.log('字符集:', document.charset)
+    console.log('页面是否隐藏:',document.hidden);
+    console.log('contentType:',document.contentType);
+    console.log('cookie:',document.cookie);
+    console.log('文本朝向,第一次打印为空字符 默认为ltr:',document.dir);
+    // 方法
+    // document.createXXX  创建东西
+    // document.getXXX     获取东西
+    // document.querySelector('.box')  元素选择器 只返回匹配到的第一个元素
+    // 还有很多 可以.出来看
+  </script>
+</body>
+</html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>表单基础</title>
+</head>
+<body>
+  <!-- form中的按钮默认点击就是submit -->
+  
+  <!-- accept-charset:服务器可以接受的字符集 -->
+  <!-- action:请求的URL -->
+  <!-- elements:表单中的所有元素 -->
+  <!-- enctype: 请求的编码类型 -->
+  <!-- length: 表单中的控件数量 -->
+  <!-- method: 请求的方法类型 -->
+  <!-- nname:表单的名字 -->
+  <!-- reset() 把表单字段重置为各自的默认值 -->
+  <!-- submit() 提交表单 -->
+  <!-- target:用于发送请求和响应请求的窗口的名称 -->
+  <!-- novalidate 禁止验证表单 -->
+  <form accept-charset="utf-8" id="form" action="http://www.baidu.com">
+
+    <!-- 文本框都支持一个select()方法 全选文本 -->
+    <!-- size为文本框的宽度(一行显示多少个字符) maxLength 最大长度 -->
+    <!-- required 必填 readonly 只读 -->
+    <input type="text" size="36" maxlength="100" id="user" required pattern="/\d+/"> 
+
+    <!-- cols 文本框宽度(列数)   rows 行数 -->
+    <textarea  cols="30" rows="10"></textarea>
+
+    <button>提交</button>
+
+    <input type="reset" value="重置">
+    <button id="reset">重置</button>
+
+    <!-- 图片按钮 -->
+    <input type="image" width="100" height="100" src="../Canvas/1.jpeg">
+
+    <input tabindex="2" type="radio" name="sex">男
+    <input tabindex="2" type="radio" name="sex">女
+    <input tabindex="2" type="radio" name="sex">保密
+  </form>
+  <script>
+    let form=document.getElementById('form');
+    document.getElementById('reset').onclick=function(){
+      console.log(document.forms);
+      form.reset();
+      form.submit();
+    }
+    form.addEventListener("submit",function(event){
+      console.log("表单提交");
+      // 阻止默认事件 即表单提交
+      // event.preventDefault();
+    })
+    form.addEventListener("reset",function(event){
+      console.log("表单重置");
+      // 阻止默认事件 即表单提交
+      // event.preventDefault();
+    })
+    // form.elements 表单中的元素
+    // name相同的元素会被包装成一个数组存在 name这个属性上
+    console.log(form.elements);
+    // 公共属性
+    // disabled 是否禁用表单字段
+    // form 指针 指向字段所属的表单 只读
+    // name 字段名称
+    // readonly 字段是否只读
+    // type 类型
+    // value 要传递给服务器的值
+
+    // 公共方法
+    // focus() 聚焦
+    // blur() 失焦
+
+    // 文本框都支持一个select方法获取文本框选中的全部文本内容
+    let user=document.getElementById('user');
+    user.addEventListener("select",function(e){
+      e.target.setSelectionRange(1,5);   // 获取部分文本
+      // e.target.select();              // 获取全部文本
+      // 文本框上属性 表示选中文本的起点和终点的偏移量
+      console.log(e.target.selectionStart,e.target.selectionEnd);
+      console.log(document.getSelection());
+    })
+    // 输入过滤
+    // 谷歌貌似ctrl组合键 不会触发keypress事件
+    user.addEventListener("keypress",function(e){
+      console.log(e.ctrlKey);
+      // 屏蔽ctrl按键 当非数字时  屏蔽输入
+      if(!/\d/.test(e.key)){
+        console.log('非数字');
+        e.preventDefault()
+      }
+    })
+
+    // 验证字段或表达有效性 这里是false 因为上面input的required没有满足
+    console.log('验证表单有效性:',form.checkValidity());
+    console.log('表单:',form.validity);
+  </script>
+</body>
+</html>

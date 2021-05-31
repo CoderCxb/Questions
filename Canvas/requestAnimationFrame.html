@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>requestAnimationFrame</title>
+  <style>
+    div{
+      width: 1px;
+      height: 100px;
+      background: red;
+    }
+  </style>
+</head>
+<body>
+  <div id="box"></div>
+  <script>
+    // chrome的精度为4ms左右  如下 本身应该是100毫秒 但是其实是400ms左右
+    console.time('time');
+    // let timer=setInterval(()=>{
+    //   document.getElementById('box').innerText=+document.getElementById('box').innerText+1;
+    //   if(document.getElementById('box').innerText=='100'){
+    //     console.timeEnd('time');
+    //     clearInterval(timer)
+    //   }
+    // },1)
+    
+    // requestAnimationFrame
+    // 类似于setInterval 但是无法设置时间间隔 默认以浏览器最优的时间进行重绘(16.7ms左右)
+    // 为什么要用?
+    // 1.setInterval等API存在时间精度的问题 并且是代码请求浏览器去绘制 无法确保浏览器一定可以绘制 但是requestAnimationFrame是浏览器主动执行 因此更为准确
+    // 2.在大多数浏览器里，当requestAnimationFrame() 运行在后台标签页或者隐藏的<iframe> 里时，requestAnimationFrame()会被暂停调用
+    function add(){
+      let timer=requestAnimationFrame(()=>{
+        document.getElementById('box').innerText=+document.getElementById('box').innerText+1;
+        add()
+      })
+      if(document.getElementById('box').innerText=='1000'){
+          console.timeEnd('time');
+          cancelAnimationFrame(timer)
+        }
+    }
+    add()
+    
+  </script>
+</body>
+</html>

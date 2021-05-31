@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IntersectionObserver</title>
+</head>
+<body>
+  <div id="box" style="height: 300px;overflow: auto;">
+    <div id="top" style="height: 100px; background: yellow;">顶部</div>
+
+    <p>哈哈</p><p>哈哈</p><p>哈哈</p><p>哈哈</p><p>哈哈</p><p>哈哈</p><p>哈哈</p><p>哈哈</p><p>哈哈</p><p>哈哈</p><p>哈哈</p><p>哈哈</p><p>哈哈</p><p>哈哈</p><p>哈哈</p><p>哈哈</p><p>哈哈</p>
+
+    <div id="center" style="height: 100px; background: red;">中心</div>
+    
+    <p>哈哈</p><p>哈哈</p><p>哈哈</p><p>哈哈</p><p>哈哈</p><p>哈哈</p><p>哈哈</p><p>哈哈</p><p>哈哈</p><p>哈哈</p><p>哈哈</p><p>哈哈</p><p>哈哈</p><p>哈哈</p><p>哈哈</p><p>哈哈</p><p>哈哈</p>
+
+    <div id="bottom" style="height: 100px; background: blue;">底部</div>
+  </div>
+  <script>
+    // 创建实例
+    // 注意:不兼容IE，但是官方提供polyfill做兼容
+    let observer=new IntersectionObserver(function(entries,ob){
+      // 1. entries是一个数组，存放的是触发的元素情况(初始化时 会全部触发)
+      // time: 3893.92, // 可见性发生变化的时间，是一个高精度时间戳，单位为毫秒
+      // target: element , // 被观察的目标元素，是一个 DOM 节点对象
+
+      // 用来描述交叉区域观察者中的根
+      // rootBounds: ClientRect {},
+
+      // 返回包含目标元素的边界信息的DOMRectReadOnly
+      // boundingClientRect: ClientRect {},
+
+      // 根和目标元素的相交区域.
+      // intersectionRect: ClientRect {},
+      // isIntersecting: true,     // 从交叉到非交叉为false，其余情况为true，初始情况下，在页面上为true，不在页面为false
+      // intersectionRatio: 0.54,  // 目标元素的可见比例 0的时候说明不可见 1完全可见
+      console.log(entries,ob);
+    },{
+      root:document.getElementById('box'),
+      rootMargin:'0px 0px 0px 0px',
+      threshold:[0,0.5,1],
+    });
+    observer.observe(document.getElementById('top'))
+    observer.observe(document.getElementById('center'))
+    observer.observe(document.getElementById('bottom'))
+    setTimeout(()=>{
+      // observer.unobserve(document.getElementById('center'));
+      // observer.disconnect();
+    },3000)
+
+    // 2. 无限滚动
+    // 在列表最后添加一个元素，每当这个元素进入viewport时，就添加元素
+    // 3. 图片懒加载
+    // 先渲染img 但是不设置的src 设置data-url(可以通过target.dataset获取),当监听的元素的 isIntersecting为true时,赋值src
+  </script>
+</body>
+</html>

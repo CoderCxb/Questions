@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>XMLHttpRequest</title>
+</head>
+<body>
+  <script>
+    let xhr=new XMLHttpRequest();
+    // (method,url,async)
+    xhr.open('get','http://localhost:777/test',true);
+    xhr.onreadystatechange=function(res){
+      // console.log(xhr.status);     // 响应的HTTP状态
+      // console.log(xhr.statusText); // 响应的HTTP状态描述
+      // readyState 0未初始化 1已打开 2已发送  3接收中 4完成
+      // console.log(xhr.readyState);
+          
+      // 获取响应头指定字段
+      // xhr.getResponseHeader("Connection")
+      // 获取所有字段
+      // console.log(xhr.getAllResponseHeaders("content-length"));
+    }
+    xhr.setRequestHeader('MyHeader',"MyValue")
+    xhr.send(null);
+    xhr.abort(); // 取消
+    let xhr2=new XMLHttpRequest();
+    xhr2.open("post","http://localhost:777/test",true);
+    // 获取form表单数据
+    let fd=new FormData();
+    fd.append('name','marco')
+    fd.append('password','123');
+    xhr2.timeout=2000; // 设置超时时间 超过这个时间没有响应就会中断 触发timeout事件 但是readyState仍然会变成4 因此也会调用readystatechange事件 不过访问status会报错
+    // 跨域 CORS 限制
+    // 无法设置自定义请求头
+    // 无法发送和接收cookie 
+    // getAllResponseHeaders() 始终返回空字符串
+    // 默认情况下 跨域请求不提供凭据(cookie HTTP认证和客户端SSL证书)
+    // 可以通过设置withCredentials设置为true表明请求会发送凭据
+    
+    xhr2.send(fd);
+    xhr2.onreadystatechange=function(res){
+      console.log(xhr2.response);
+    }
+  </script>
+</body>
+</html>

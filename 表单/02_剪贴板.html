@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>剪贴板</title>
+</head>
+<body>
+  <input type="text" id="user">
+  <script>
+    let user=document.getElementById("user");
+    // 想获取剪贴板上的数据 可以通过event或者window(IE)上的clipboardData获取
+    // 在剪切和复制时拿不到剪贴板的数据 只有在粘贴时可以
+    user.addEventListener("beforecopy",function(){
+      console.log("复制前");
+    })
+    user.addEventListener("copy",function(event){
+      console.log("复制");
+      console.log(event.clipboardData.getData("text"));
+    })
+    user.addEventListener("beforecut",function(){
+      console.log("剪切前");
+    })
+    user.addEventListener("cut",function(event){
+      console.log("剪切");
+      console.log(event.clipboardData.getData("text"));
+    })
+    user.addEventListener("beforepaste",function(){
+      console.log("粘贴前");
+    })
+    user.addEventListener("paste",function(){
+      console.log("粘贴");
+      console.log(event.clipboardData.getData("text"));
+    })
+  </script>
+</body>
+</html>

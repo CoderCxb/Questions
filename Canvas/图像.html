@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>图像</title>
+</head>
+<body>
+  <script>
+    // canvas的左上角为坐标(0,0) x向右变大  y向下变大
+    let board=document.createElement("canvas");
+    board.width=1200;
+    board.height=800;
+    let img=document.createElement("img");
+    img.src='./1.jpeg';
+    board.innerText="Your Browser is'nt support canvas,please update your browser!";
+    let img2=document.createElement("img");
+    img2.src="./2.png";
+    let img3=document.createElement("img");
+    window.onload=function(){
+      if(board.getContext){
+        let context=board.getContext("2d");
+       
+        // drawImage(image,x,y,width,height,offsetX,offsetY,)
+        // offsetX和offsetY 图片的起始坐标
+        // offsetEndX和offsetEndY 图片的终点坐标
+        // 配合在一起就是截取图片的一部分 截取部分若大于设置的宽高 不会被隐藏 会显示出来
+        // context.drawImage(img,100,100,100,120,0,0,200,200)
+
+        // 创建模式 可以用于填充(fill)
+        // let pattern=context.createPattern(img2,"repeat");
+        // context.translate(0,250)
+        // context.fillStyle=pattern;
+        // context.fillRect(0,0,250,300)
+
+        // 跨域问题 因为在本地跑起来的时候 (相对路径)图片是file协议的 而hml文件是绝对路径
+        // 因此存在跨域问题 可以将图片路径改为绝对路径 或者跑在服务器上
+        // context.fillStyle="blue";
+        // context.fillRect(0,0,250,250)
+        // context.fillStyle="red";
+        // context.fillRect(0,0,100,100)
+        // let imgData=context.getImageData(0,0,200,200);
+        // context.putImageData(imgData,200,200)
+      }
+
+    }
+    document.body.appendChild(board);
+  </script>
+</body>
+</html>

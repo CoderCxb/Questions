@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>矩形</title>
+</head>
+<body>
+  <script>
+    // canvas的左上角为坐标(0,0) x向右变大  y向下变大
+    let board=document.createElement("canvas");
+    board.width=1200;
+    board.height=800;
+    board.innerText="Your Browser is'nt support canvas,please update your browser!";
+    if(board.getContext){
+      let context=board.getContext("2d");
+      context.fillStyle="blue";  // 填充色
+      context.strokeStyle="red"; // 描边颜色
+      context.lineWidth=5;  // 控制线条宽度
+      // 矩形
+      context.rect(10,10,100,100); // 画矩形 然后可以使用stroke描边画一个空心矩形 或者fill填充画一个实心矩形
+      context.fill() // 填充
+      context.fillStyle='yellow'; // 改变填充颜色
+      context.fillRect(25,25,50,50); // 直接画填充矩形
+      context.stroke();   // 描边 宽度由lineWidth控制 
+      // context.clearRect(37.5,37.5,25,25); // 擦除指定区域
+      // 
+    }
+    document.body.appendChild(board);
+  </script>
+</body>
+</html>

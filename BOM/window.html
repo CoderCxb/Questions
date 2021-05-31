@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <img src="https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=2699437196,2241898528&fm=26&gp=0.jpg" alt="">
+    <img src="https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=2699437196,2241898528&fm=26&gp=0.jpg" alt="">
+    <img src="https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=2699437196,2241898528&fm=26&gp=0.jpg" alt="">
+    <img src="https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=2699437196,2241898528&fm=26&gp=0.jpg" alt="">
+    <button onclick="createPage()">打开新页面</button>
+    <button onclick="scrollPage()">滚动到指定位置</button></button>
+    <script>
+        function createPage(){
+            // open(url,target,features,replace)方法 打开新窗口 
+            // target如果是已经存在的窗口或者frame的名字 则会在对应的窗口或者frame中打开url features则是窗口配置 具体可以查看MDN
+            let newPage=window.open('','新窗口','',false)
+            // 可以通过判断newPage是否为null 检测弹窗是否被屏蔽
+            console.log(newPage.opener); // 本窗口被哪个窗口打开的 如果没有 则是null 
+            setTimeout(() => {
+                newPage.stop(); // 停止加载 相当于点击了浏览器的停止按钮
+                console.log(newPage.close()); // 关闭窗口(只能关闭open出来的) 
+                console.log(newPage.closed);  // 是否关闭
+            }, 1000);
+        }
+        function scrollPage(){
+            // 视口位置
+            // window.scrollTo(100,200)
+            // window.scrollBy()
+            window.scroll({
+                top:0,
+                behavior:"smooth" // auto直接到达 smooth平滑过渡 有动画
+            })
+        }
+        setTimeout(()=>{
+            window.focus()
+        })
+        // top对象始终指向最上层窗口 即浏览器窗口本身
+        console.log(window.top);
+        // parent对象指向父窗口 如果本身就是最顶层窗口 则parent指向自身
+        console.log(window.parent);
+        // self对象指向自身
+        console.log(window.self);
+        // 浏览器相对于屏幕的位置
+        console.log(window.screenLeft);
+        console.log(window.screenTop);
+        console.log(window.screenX);
+        console.log(window.screenY);
+        // 当前屏幕对象
+        console.log(window.screen);
+
+        // 窗口大小
+        console.log(window.innerHeight);// 浏览器窗口页面视口大小 不包含工具栏等
+        console.log(window.outerHeight);// 浏览窗口大小
+
+        // setTimeout(handler,delay,...args) 
+        // 采用的是剩余参数形式 
+        setTimeout(function() {
+            console.log('setTimeout接收参数:',arguments);
+        }, 1000,1,2,3);
+        // setInterval()使用基本同上 不建议使用 可以用嵌套setTimeout代替
+
+        // 普通弹窗
+        alert('This is alert!')
+        // 确认框 返回true或false
+        let result=confirm('This is Confirm!')
+        console.log(result);
+        // 带输入框的确认框 返回的是文本或者null
+        let result2=prompt('This is promt','默认文本')
+        console.log(result2);
+
+    </script>
+</body>
+</html>

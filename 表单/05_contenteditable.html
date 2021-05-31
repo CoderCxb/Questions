@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>contenteditable实现富文本编辑</title>
+  <style>
+    #richedit{
+      width: 300px;
+      height: 450px;
+      border: none; 
+      outline: none;
+      background:#ddd;
+    }
+  </style>
+</head>
+<body>
+  <div contenteditable id="richedit"></div>
+  <script>
+    // 默认情况就可以使用ctrl+b 加粗 ctrl+i 斜体 ctrl+u 下划线
+    let richedit=document.getElementById("richedit");
+    // 富文本交互常用命令
+    // 命令                 取值              说明
+    // backcolor         颜色字符串        设置文档背景颜色
+    // bold                 null           加粗选中文本
+    // copy                 null           复制选中文本
+    // createLink         URL字符串       将当前文本转换成指定URL的链接
+    // cut                  null           剪切选中文本
+    // delete               null           删除指定文本
+    // fontname            字体名         改变选中文本的字体
+    // fontsize             1~7         改变选中文本的大小   
+    // forecolor         颜色字符串      改变选中字体的颜色
+    // formatblock        HTML标签      使用标签包裹选中文本
+    // indent               null        缩进文本     
+    // inserthorizontalrule null        光标位置插入<hr>
+    // insertimage         图片URL      光标位置插入图片
+    // insertorderedlist    null        光标位置插入<ol>元素
+    // insertparagraph      null        光标位置插入<p>
+    // insertunorderedlist  null        光标位置插入<ul>
+    // italic               null        切换斜体
+    // justifycenter        null        光标位置居中文本块
+    // justifyleft          null        光标位置左对齐文本块
+    // outdent              null        减少缩进
+    // paste                null        粘贴
+    // removeformat         null        移除光标所以在位置的HTML标签
+    // selectall            null        选中文本所有文本
+    // underline            null        下划线
+    // unlink               null        移除文本链接
+    richedit.addEventListener("keypress",function(e){
+      //  第二个值填false 第三个才是参数               
+      //                    命令  false  值
+      document.execCommand("bold",false,null)
+      console.log('命令是否可用:',document.queryCommandEnabled("bold"));
+      console.log('命令是否应用:',document.queryCommandState("bold"));
+      console.log('命令使用的值:',document.queryCommandValue("bold"));
+      // e.preventDefault();
+    })
+    // 通过表单提交富文本
+    // 可以将富文本的innerHTML赋值给表单中的一个字段 这个字段在页面上不显示
+    // 这样在提交的时候就会把富文本给提交到服务器
+  </script>
+</body>
+</html>

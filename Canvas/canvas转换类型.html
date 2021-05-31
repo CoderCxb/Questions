@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>toDataURL</title>
+</head>
+<body>
+  <script>
+    // toDataURL可以将canvas转成png形式的data数据  data:xxxx形式
+    let board=document.createElement("canvas");
+    let context=board.getContext("2d");
+    context.fillStyle="#222";
+    context.strokeStyle="red";
+    context.rect(0,0,100,100)
+    context.fill()
+    let img=document.createElement("img")
+    // canvas转data协议数据
+    img.src=board.toDataURL()
+    document.body.appendChild(img)
+    // 将canvas转成blob
+    board.toBlob(function(blob){
+      console.log(blob);
+    },"image/png",100);
+  </script>
+</body>
+</html>

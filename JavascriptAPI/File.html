@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>File API</title>
+</head>
+<body>
+  <input type="file" id="files">
+  <img id="img">
+  <script>
+    let files=document.getElementById("files");
+    files.onchange=function(){
+      // 主要属性: name文件名  type 文件类型  size 文件大小
+      console.log(event.target.files);
+      let file=files.files[0];
+      let fr=new FileReader();
+      // readAsText(file,encoding) 读取纯文本内容并保存在result属性
+      // fr.readAsText(file,'utf-8');
+
+      // readAsDataURL()    读取文件并将内容的数据URL保存到result属性(可赋值给src直接使用)
+      fr.readAsDataURL(file)
+
+      // readAsArrayBuffer  读取文件并将文件内容以ArrayBuffer形式保存在result属性
+      // fr.readAsArrayBuffer(file)
+      
+      // readAsBinaryString() 读取文件并将每个字符的二进制数据保存到result属性
+      // fr.readAsBinaryString(file)
+
+      // fr.abort(); /// 提前终止文件读取 会触发abort事件
+
+      // 加载完成事件
+      fr.onload=function(event){
+        console.log(event);
+        // 数据都存储在result属性中
+        // DONE:2 EMPTY  LOADING  
+        // readyState表示fr的状态
+        // error 表示错误对象 如果没有发生错误 则为null
+        console.log(fr.DONE,fr.EMPTY,fr.LOADING,fr.error);
+        // document.getElementById('img').src=fr.result;
+      }
+
+      // 加载进度事件
+      fr.onprogress=function(event){
+        console.log(event);
+      }
+
+      // 加载报错事件
+      fr.onerror=function(err){
+        console.log(err);
+      }
+
+      fr.onloadstart=function(){
+        console.log('读取操作执行前触发');
+      }
+
+      fr.onabort=function(){
+        console.log('使用abort方法终止读取时触发');
+      }
+
+      fr.onloadend=function(){
+        console.log('读取操作执行结束后触发');
+      }
+
+     
+    }
+  </script>
+</body>
+</html>

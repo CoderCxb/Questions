@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Node</title>
+</head>
+<body>
+  <div id="father" class="box tab">
+    <div id="bro1">兄</div>
+    <div id="bro2">弟</div>
+  </div>
+  <script>
+    // 注意：节点包括元素节点 如<div></div> 和 文本节点 任意字符串(包括空格换行等)都算是文本节点
+    // 共12种节点 但浏览器并不支持所有节点类型，最常用的就是元素节点和文本节点 
+    console.log(Node.ELEMENT_NODE); // 1
+    console.log(Node.TEXT_NODE);    // 3  
+    // 创建了一个元素节点 
+    // nodeName 节点名称   nodeValue 节点值  nodeType 节点类型(数字常量)
+    // childNodes 子节点(类数组)   
+    let elementNode=document.createElement('div')     // 元素节点
+    elementNode.innerText='新节点';
+    // let textNode=document.createTextNode('TextNode')  // 文本节点
+    let father=document.querySelector("#father");
+    // 1.实用属性
+    console.log('元素所属的document:',father.ownerDocument);
+    console.log('元素的父元素-parentElement:',father.parentElement);
+    console.log('元素的父元素-parentNode:',father.parentNode);
+    console.log('第一个子节点-firstChild:',father.firstChild);
+    console.log('最后一个子节点-lastChild:',father.lastChild); 
+    console.log('第一个元素节点-firstElementChild:',father.firstElementChild); 
+    console.log('最后一个元素节点-lastElementChild:',father.lastElementChild);   
+    console.log('子元素个数-childElementCount:',father.childElementCount);   
+    console.log('子节点-childNodes:',father.childNodes); 
+    console.log('元素Id-id:',father.id);
+    console.log('子元素-children:',father.children);
+    console.log('元素class的值-className:',father.className);
+    console.log('元素类名数组-classList:',father.classList);
+    console.log('元素的属性-attributes:',father.attributes);
+    console.log('元素后代的HTML文本:',father.innerHTML);
+    console.log('元素及其后代的HTML文本:',father.outerHTML);
+    console.log('元素的textContent:',father.textContent);
+    console.log('元素所在的URI:',father.baseURI);
+    console.log('节点是否连接到上下文对象:',father.isConnected);
+    let bro1=document.querySelector('#bro1');
+    let bro2=document.querySelector('#bro2');
+    // nextElementSibling  下一个兄弟元素
+    console.log('下一个兄弟元素-nextElementSibling:',bro1.nextElementSibling);  
+    // nextSibling 下一个兄弟节点 
+    console.log('下一个兄弟节点-nextSibling:',bro1.nextSibling);
+    // previousElementSibling 前一个兄弟元素
+    console.log('前一个兄弟元素-previousElementSibling:',bro2.previousElementSibling);
+    // nextSibling 上一个兄弟节点 
+    console.log('上一个兄弟节点-previousSibling:',bro2.previousSibling);
+
+    // 2.实用方法
+    let newNode=father.cloneNode(true) // true会拷贝所有子元素 如果不加true 则只拷贝该元素
+    console.log(newNode);
+    // father.after()       // 元素后插入元素
+    // father.before()      // 元素前插入元素
+    // father.remove()      // 删除该元素
+    // father.append()      // 末尾插入元素
+    father.replaceChild(elementNode,bro1) // 替换元素
+    // father.appendChild() // 末尾插入元素
+    // father.insertBefore(elementNode,bro1);  // 在某个元素前插入新元素
+    console.log('是否包含子节点-hasChildNodes:',father.hasChildNodes()); 
+    console.log('是否包含某个节点-contains:',father.contains(newNode)); 
+    // 区别是 克隆出来的isEqualNode为true 但是isSameNode为false 
+    console.log('判断节点是否相等-isEqualNode:',father.isEqualNode(newNode));
+    console.log('判断节点是否是同一个-isSameNode:',father.isSameNode(newNode));
+    // father.normalize() // 节点规范化,在一个"规范化"后的DOM树中，不存在一个空的文本节点，或者两个相邻的文本节点
+    function fatherClick(){
+      console.log('点击');
+    }
+    // father.addEventListener('click',fatherClick)     // 设置监听
+    // father.removeEventListener('click',fatherClick)  // 移除监听
+    // father.removeAttribute('class') // 移除属性
+    // father.removeChild(bro1) // 移除元素
+  </script>
+</body>
+</html>

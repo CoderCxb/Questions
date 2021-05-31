@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Attr</title>
+</head>
+<body>
+  <div></div>
+  <div></div>
+  <div></div>
+  <script>
+    // 属性节点 元素中的属性也是节点
+    let div=document.querySelector('div');
+    let attr=document.createAttribute('id')
+    attr.value='box';
+    console.log('nodeType:',attr.nodeType);
+    console.log('nodeName:',attr.nodeName);
+    console.log('nodeValue:',attr.nodeValue);
+    
+  </script>
+</body>
+</html>

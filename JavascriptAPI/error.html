@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Error</title>
+</head>
+<body>
+  <script>
+    // Error 
+    // InternalError 
+    // EvalError
+    // RangeError
+    // ReferenceError
+    // SyntaxError
+    // TypeError
+    // URIError 
+    try {
+      // console.log(a);
+      throw Error('throw抛出的异常')
+    } catch (error) {
+      console.log(error);
+    }finally{
+      console.log('finally');
+    }
+    console.log('log');
+    console.info('infp');
+    console.warn('warn');
+    console.error('error');
+    // debugger // 打断点
+    window.onerror=function(){
+      console.log('全局监听error事件');
+      // 阻止
+      return false;
+    }
+  </script>
+</body>
+</html>

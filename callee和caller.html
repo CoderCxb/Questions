@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+   <script>
+    function test() {
+      // test.caller取决于调用函数的作用域 如果是window 则为null 如果在别的函数中调用 则为该函数
+      console.log(test.caller);
+      //  arguments.callee就是test本身
+      // console.log(arguments.callee);
+    }
+    // 在window中直接调用 test.caller为null
+    test();
+    
+    function fn(){
+      // 在fn中调用 则test.caller为fn函数本身
+      test()
+    }
+    fn()
+   </script>
+</body>
+</html>

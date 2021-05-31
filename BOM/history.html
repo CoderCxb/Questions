@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>history</title>
+</head>
+<body>
+  <script>
+    // history
+    // history对象表示当前窗口首次使用以来用户的导航历史信息。
+    // go(0) 刷新 (1)前进一个 (-1)后退一个 以此类推
+    // 也可以接收字符串 如果字符串在历史中 则会跳转
+    // history.go(1)
+
+    // history.back() // 后退一页
+    // history.forward() // 前进一页
+
+    console.log(history.length); // 历史记录中总共有几页
+    console.log(history.state);
+    // 貌似pushState和replaceState在file协议打不开
+    // 主要用途就是改变了url并且放进历史栈中 但是不刷新页面 也不会向服务器请求
+    // history.replaceState({},'标题','baz.html')
+    // history.pushState({name:'marco'},'标题','baz.html')
+  </script>
+</body>
+</html>

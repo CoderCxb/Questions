@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>location</title>
+</head>
+<body>
+  <script>
+    // location对象提供了当前窗口加载文档的信息以及通常的导航功能
+    // document和window上的location指向同一个location对象
+
+    // 原始URL
+    // http://foouser:barpassword@www.wrox.com:80/WileyCDA/?q=javascript@contents
+
+    // location的属性：除了hash以外 其他属性的修改 都会重新加载URL 
+    // URL散列值(#后续跟的字符串)hash:  "#contents"
+    // 服务器名及端口号 host:  "www.wrox.com:80"
+    // 服务器名 hostname:  "www.wrox.com"
+    // 端口号 port: "80"
+    // URL中的路径或文件名 pathname:  /WileyCDA/
+    // 页面使用的协议 protocol : "http:"
+    // URL的查询字符串(?开头) search: "?q=javascript"
+    // 域名前指定的用户名 username :  "foouser"
+    // 域名前指定的密码   password :  "barpassword"
+    // URL的源地址  origin : "http://www.wrox.com"
+    // 当前页面的完整URL:  http://foouser:barpassword@www.wrox.com:80/WilerCDA/?q=javascript@contents
+    console.log(window.location.port);
+    let qs='?q=javascript&p=python'
+    let sp=new URLSearchParams(qs)
+    // URLSearchParams和Map很像
+    console.log(...sp.entries()); // [["q", "javascript"],["p", "python"]]
+
+    // 操作location
+    // 以下两个操作都是replace的 即无法后退
+    // location.assign('http://baidu.com') // 跳转地址
+    // 等价于
+    // location.href='http://baidu.com';  
+
+    // 重新加载页面 可能从缓存加载    reload(true)强制加载 从服务器加载
+    // location.reload()
+
+    // 取代: 加载新页面 并且无法后退
+    // location.replace('http://baidu.com')
+    
+  </script>
+</body>
+</html>

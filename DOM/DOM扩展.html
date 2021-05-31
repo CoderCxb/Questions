@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DOM扩展</title>
+</head>
+<body>
+  <div id="box" data-icon="plus"><p></p></div>
+  <ul class="list outer"><li class="item">1</li><li class="item">2</li></ul>
+  <script>
+    // querySelector比较灵活 可以变通使用
+    let box=document.querySelector('#box');
+    let items=document.querySelectorAll('.item');
+    let p=document.getElementById('box').querySelector('p');
+    let p2=document.querySelector('#box>p');
+    console.log(p==p2);
+    console.log(box);    
+    console.log(items);
+    // CSS扩展 
+    // let items=document.getElementsByClassName("item"); // HTML5新增方法
+    let list=document.querySelector('.list');
+    console.log(list.classList); // add(添加) contains(包含？) remove(删除) toggle(有则删,无则加)
+
+    console.log(document.readyState); // complete 加载完成     loading 加载中
+
+    // data- 自定义属性 通过 dataset获取
+    console.log(box.dataset);
+
+    // 接收boolean true:元素顶部和视口顶部对齐 false:底部对齐
+    box.scrollIntoView(true)
+    // 接收对象
+    // behavior: smooth 平滑滚动  auto 瞬移
+    // block: 垂直方向对齐,start,center,end,bearest
+    // inline:水平方向对齐,start,center,end,bearest
+  </script>
+</body>
+</html>

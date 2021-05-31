@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>storage</title>
+</head>
+<body>
+  <script>
+    window.addEventListener("storage",function(e){
+      console.log(e);
+    })
+    // localstorage是永久存储 而sessionstorage是会话存储 关闭浏览器就会清空
+    // 设置storage
+    localStorage.setItem('name','marco');
+    // 也可以直接操作localstorage
+    // localStorage.age=10;
+    // storage的长度
+    console.log(localStorage.length);
+    // 通过第x个key
+    console.log(localStorage.key(0));
+    // 通过key获取值
+    console.log(localStorage.getItem('name'));
+    // 移除某个key对应的值
+    // localStorage.removeItem('name');
+    // 清空storage
+    // localStorage.clear();
+    console.log(localStorage);
+    
+  </script>
+</body>
+</html>
