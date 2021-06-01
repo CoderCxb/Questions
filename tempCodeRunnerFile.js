@@ -1,2 +1,1 @@
-	.then(() => {
-				console.log('t
+Promise.resolve(222)
