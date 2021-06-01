@@ -1,4 +1,3 @@
-//
 let obj = {
 	name: 'marco',
 	age: 20,
@@ -22,6 +21,10 @@ let obj2 = {
 // 1.可以通过replacer指定哪些属性需要序列化 数组的时候数组的值就是number了
 // 注意：如果该属性是一个数组 则还需要把该对象中需要序列化的属性也写上去
 // 如下 info中有type和source，以下写了type 但是没有source，所有source没有被序列化
+// 2. JSON语法支持表示三种类型的值
+// 2.1 简单值:字符串 数值 布尔值 null可以      undefined不可以
+// 2.2 对象:
+// 2.3 数组:
 console.log(JSON.stringify(obj, ['name', 'age', 'run', 'info', 'type']));
 JSON.stringify(obj, function (key, value) {
 	console.log('key:', key, 'value:', value);

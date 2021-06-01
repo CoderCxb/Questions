@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>变换</title>
+</head>
+<body>
+  <script>
+    // canvas的左上角为坐标(0,0) x向右变大  y向下变大
+    let board=document.createElement("canvas");
+    board.width=1200;
+    board.height=800;
+    board.innerText="Your Browser is'nt support canvas,please update your browser!";
+    if(board.getContext){
+      let context=board.getContext("2d");
+      context.fillStyle="blue";  
+      context.translate(100,100) // 修改原点坐标至(x,y) 执行完 (0,0)就指向这个坐标 
+      context.rotate(Math.PI/4); // 旋转
+      context.scale(2,1); // 横纵坐标缩放
+      // 变换只能改变之后的绘制 之前的绘制不受影响
+      context.rect(10,10,100,100); 
+      // context.fill()
+      context.save();  // 保存当前设置和变换
+      context.fillStyle="red";
+      context.fill();
+      context.restore(); // 恢复之前保存的设置和变换
+      setTimeout(()=>{context.fill()},2000)
+    }
+    document.body.appendChild(board);
+  </script>
+</body>
+</html>

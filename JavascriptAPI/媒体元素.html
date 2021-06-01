@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>媒体元素</title>
+</head>
+<body>
+  <!-- 视频播放 -->
+  <!-- 以下属性 同样可以在video对象上查看到 -->
+  <!-- autoplay  自动播放 -->
+  <!-- controls  控制条 -->
+  <!-- width height  宽高 -->
+  <!-- src  资源地址 -->
+  <!-- muted 静音 -->
+  <!-- loop 循环播放 -->
+  <!-- preload 预加载 auto/none/metadata -->
+  <!-- poster 展位图片 -->
+
+  <!-- 此处视频太大  就不上传到github了 -->
+  <!-- <video loop preload="auto" controls autoplay src="./1.mp4" width="500">video标签不可用时显示</video> -->
+  <!-- 谷歌无法自动播放 设置了也无效 -->
+  <audio autoplay controls src="./Phoiex.mp3">audio标签不可用时显示</audio>
+  <script>
+    let v=document.getElementsByTagName('video').item(0);
+    v.defaultPlaybackRate=0.5;
+    // canplay事件 初始时触发一次 每次点击进度条跳转 也会触发
+    v.oncanplay=function(){
+      console.log('音量:',v.volume);
+      console.log('当前src:',v.currentSrc); // canPlay后有值
+      console.log('当前播放时间:',v.currentTime); 
+      console.log('是否暂停',v.paused);    
+      console.log('视频时长:',v.duration);      
+      console.log('是否播放完成:',v.ended);
+      console.log('当前播放的时间范围:',v.played);
+      console.log('可以跳转的时间范围',v.seekable);
+      console.log('播放器是否正在移动到新位置:',v.seeking);
+      console.log('对象,已下载缓冲的事件范围:',v.buffered);
+      console.log('视频宽度:',v.videoWidth);
+      console.log('视频高度:',v.videoHeight);
+      console.log('视频发生错误时的错误对象:',v.error);
+      // 修改了并不会影响播放速率
+      console.log('默认回放速率,默认为1:',v.defaultPlaybackRate); 
+      // 修改播放速率使用 playbackRate
+      v.playbackRate=1.2;      
+      //  0空 1加载中 2加载元数据 3加载第一帧 4加载完成
+      console.log('当前网络连接状态:',v.networkState);
+      // 0不可用 1显示当前帧 2可以播放 3可以从头播放到尾
+      console.log('媒体是否准备就绪:',v.readyState);
+      // canPlayType方法 检测是否可以播放某个MIME类型的文件
+    }
+    
+    // video和audio的方法
+    // v.pause() // 暂停
+    // v.play()  // 恢复播放
+    // v.load()  // 重新加载视频元素
+
+    // 事件
+    // 1. abort                 下载中断
+    // 2. canplay               回放可以开始
+    // 3. canplaythrough        回放可以继续
+    // 4. canshowcurrentframe   已经下载当前帧
+    // 5. dataunavailable       不能回放 因为没有数据 readyState为0 
+    // 6. durationchange        duration属性发生改变
+    // 7. emptied               网络连接关闭
+    // 8. ended                 播放完一遍 且停止了
+    // 9. error                 下载期间发生错误   
+    // 10.load                  所有媒体完全下载完毕(废弃,使用canplaythrough) 
+    // 11.loadeddata            第一帧下载完毕
+    // 12.loadedmetadata        媒体元数据下载完毕
+    // 13.loadstart             下载开始
+    // 14.pause                 回放暂停
+    // 15.play                  媒体收到播放请求
+    // 16.playing               媒体已经开始播放
+    // 17.progress              下载中
+    // 18.ratechange            播放速率发生改变
+    // 19.seeked                跳转结束
+    // 20.seeking               回放已移动到新的位置
+    // 21.stalled               浏览器尝试下载 但是没有收到数据
+    // 22.timeupdate            currentTime被意外或非常规修改了
+    // 23.volumechange          volume或者muted被修改
+    // 24.waiting               回放暂停 以加载更多数据
+  </script>
+</body>
+</html>

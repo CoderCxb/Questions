@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>富文本编辑</title>
+</head>
+<body>
+  <iframe width="300" height="600" name="richedit"></iframe>
+  <script>
+    window.addEventListener("load",function(){
+      let richedit=frames['richedit'];
+      richedit.document.designMode="on";
+      richedit.addEventListener("keypress",function(e){
+        let selection=document.getSelection();
+        // anchorNode: null     选区开始节点
+        // anchorOffset: 0      选区开始的偏移量
+        // focusNode: null      选区结束的节点
+        // focusOffset: 0       focusNode中包含在选区内的字符数
+        // isCollapsed: true    选区起点和终点是否在同一个地方
+        // rangeCount: 0        选区内包含的DOM范围数量
+        console.log(selection);
+      })
+    })
+  </script>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>渐变</title>
+</head>
+<body>
+  <script>
+    // canvas的左上角为坐标(0,0) x向右变大  y向下变大
+    let board=document.createElement("canvas");
+    board.width=1200;
+    board.height=800;
+    board.innerText="Your Browser is'nt support canvas,please update your browser!";
+    if(board.getContext){
+      let context=board.getContext("2d");
+      // 从(0,0)到(200,200)绘制渐变 即 超出范围使用渐变色无效 
+      // 线性渐变
+      let linearGradient=context.createLinearGradient(0,0,200,200);
+      // 色标位置为0~1之间  第二个参数为颜色
+      linearGradient.addColorStop(0,"red");
+      linearGradient.addColorStop(0.5,"blue");
+      linearGradient.addColorStop(1,"yellow");
+      context.fillStyle=linearGradient;
+      context.fillRect(0,0,500,500);
+
+      // 放射性渐变 
+      // 两个同心圆 外圆半径要内圆大
+      let radialGradient=context.createRadialGradient(250,250,20,250,250,50)
+      radialGradient.addColorStop(0,"green");
+      radialGradient.addColorStop(1,"skyblue");
+      context.fillStyle=radialGradient;
+      context.arc(250,250,45,0,2*Math.PI)
+      context.closePath()
+      context.fill()
+    }
+    document.body.appendChild(board);
+  </script>
+</body>
+</html>

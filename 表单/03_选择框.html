@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>选择框</title>
+</head>
+<body>
+  <!-- 单选默认选中第一个 多选不默认选中 -->
+  <select name="sex" id="sex" multiple>
+    <option value="man">男</option>
+    <option value="woman">女</option>
+    <option value="unknown">未知</option>
+  </select>
+  <button id="removeFirst">删除第一个选项</button>
+  <script>
+    let sex=document.getElementById("sex");
+    // 移除第一个选项
+    document.getElementById("removeFirst").onclick=function(){
+      sex.remove(0)
+    }
+    // select元素
+    console.log('是否支持多选:',sex.multiple); 
+    console.log('options',sex.options);
+    console.log('当前选中的index:',sex.selectedIndex); //  没有选中则为-1
+    console.log('可见行数 size:',sex.size);
+
+    // option元素
+    let firstOption=sex.options[0];
+    console.log('index:',firstOption);
+    console.log('label标签:',firstOption.label);
+    console.log('是否选中 selected:',firstOption.selected);
+    // 推荐使用这个方式获取option的text和value text是看到的 value是发送给后台的
+    console.log('文本:',firstOption.text);
+    console.log('value:',firstOption.value);
+  </script>
+</body>
+</html>

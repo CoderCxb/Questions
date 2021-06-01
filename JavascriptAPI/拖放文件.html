@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>拖放文件</title>
+  <style>
+    #dropBox{
+      width: 250px;
+      height: 250px;
+      background: #ccc;
+    }
+    #store{
+      width: 250px;
+      height: 250px;
+      background:blue;
+    }
+  </style>
+</head>
+<body>
+  <div id="dropBox" draggable="true">
+    <img src="../Canvas/2.png" draggable="true" width="50">
+  </div>
+  <div id="store"></div>
+  <script>
+    // 拖拽元素的draggable必须为true  
+    // 需要阻止drop和dragover的默认事件
+    let dropBox=document.getElementById("dropBox");
+    // drop: 拖拽元素落下时触发
+    dropBox.addEventListener("drop",function(e){
+      // 获取拖拽的文件
+      console.log(e.dataTransfer.files);
+      e.preventDefault();
+    })
+    // dragover:拖拽元素上其上时触发
+    dropBox.addEventListener("dragover",function(e){
+      // console.log('dragover');
+      e.preventDefault();
+    })
+    // drag:拖拽元素开始后触发 鼠标移动过程中不停的触发 在dragover前触发
+    dropBox.addEventListener("drag",function(e){
+      // console.log('drag');
+      // e.preventDefault();
+    })
+    // dragstart:拖拽元素前触发
+    dropBox.addEventListener("dragstart",function(e){
+      // console.log('dragstart');
+      // e.preventDefault();
+    })
+    
+  </script>
+</body>
+</html>

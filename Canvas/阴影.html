@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>阴影</title>
+</head>
+<body>
+  <script>
+    let board=document.createElement("canvas");
+    board.width=1200;
+    board.height=800;
+    board.innerText="Your Browser is'nt support canvas,please update your browser!";
+    if(board.getContext){
+      let context=board.getContext("2d");
+      context.shadowColor="blue";  // 阴影颜色
+      context.shadowOffsetX=10;    // 阴影纵坐标偏移量
+      context.shadowOffsetY=50;    // 阴影横坐标偏移量
+      context.shadowBlur=20;       // 阴影模糊度
+      context.fillRect(20,20,50,50)
+    }
+    document.body.appendChild(board);
+  </script>
+</body>
+</html>

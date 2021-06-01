@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="box"></div>
+    <script>
+        // 3.给出如下虚拟dom的数据结构，如何实现简单的虚拟dom，渲染到目标dom树
+//样例数据
+        let demoNode = ({
+            tagName: 'ul',
+            props: {'class': 'list'},
+            children: [
+                ({tagName: 'li', children: ['douyin']}),
+                ({tagName: 'li', children: ['toutiao']})
+            ]
+        });
+        
+        function changeVDomToDom(root,vDom){
+            let node=document.createElement(
+                vDom.tagName,
+                {
+                ...vDom.props
+                });
+            let children=vDom.children;
+            for(let child of children){
+                if(typeof child==="string"){
+                    node.innerText=child;
+                    root.appendChild(node)
+                }else{
+                    root.appendChild(changeVDomToDom(node,child))
+                }
+            }
+            return root;
+
+        }
+        function render(){
+            changeVDomToDom(document.getElementById('box'),demoNode)
+        }
+        render();
+    </script>
+</body>
+</html>

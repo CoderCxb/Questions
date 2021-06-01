@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>路径</title>
+</head>
+<body>
+  <script>
+    // canvas的左上角为坐标(0,0) x向右变大  y向下变大
+    let board=document.createElement("canvas");
+    board.width=1200;
+    board.height=800;
+    board.innerText="Your Browser is'nt support canvas,please update your browser!";
+    if(board.getContext){
+      let context=board.getContext("2d");
+      context.fillStyle="blue";  // 填充色
+      context.strokeStyle="black"; // 描边颜色
+      context.lineWidth=5;      // 控制线条宽度
+      context.lineCap="butt";   // 线条端点形状 butt平头 round圆头 square方头
+      context.beginPath();      // 路径开始
+      context.moveTo(10,10);    // 移动绘制光标 不绘制
+      context.lineTo(200,200);  // 绘制从光标到(x,y)的路径  
+      context.arcTo(250,250,200,300,60);// (x,y,x2,y2,r) 绘制经过(x,y)到(x2,y2)的半径为r的弧线 r有范围限制 太大或太小都不行 
+      context.closePath();         // 闭合路径
+      context.stroke();         // 将路径画出来
+      context.fill();           // fill会将起点和终点连接起来 然后进行填充  
+      // 圆弧/圆形
+      context.beginPath()
+      context.arc(300,200,50,0,Math.PI/2); // 画的是圆弧而非扇形
+      context.closePath();
+      context.stroke();
+      context.fill();
+
+      // 注意：贝塞尔曲线的点是控制点 并不是会经过该点
+      // 二次贝塞尔曲线
+      context.beginPath();
+      context.moveTo(0,320)
+      context.quadraticCurveTo(100,360,0,500)
+      context.closePath();
+      context.stroke();
+      context.fill();
+
+      // 三次贝塞尔曲线
+      context.beginPath();
+      context.moveTo(0,200)
+      context.bezierCurveTo(100,225,10,250,0,300)
+      // 路径是否过点
+      console.log(context.isPointInPath(100,255)); 
+      console.log(context.isPointInStroke(100,255));
+      context.closePath();
+      context.stroke();
+      context.fill();
+
+      
+    }
+    document.body.appendChild(board);
+  </script>
+</body>
+</html>

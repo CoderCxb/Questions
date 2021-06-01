@@ -18,3 +18,7 @@ console.log(String.fromCharCode(0x61)); // a
 let str = new Object('Hello Javascript');
 // console.log(str instanceof String); // true
 // console.log(str.slice(0,5));  // 虽然会报错 但是可以运行成功
+
+let s='Hello';
+s.len=5; // 由于每次包装完都会被销毁 因此赋值无效
+console.log(s.len); // undefined 

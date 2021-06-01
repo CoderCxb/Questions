@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>合成</title></title>
+</head>
+<body>
+  <script>
+    let board=document.createElement("canvas");
+    board.width=1200;
+    board.height=800;
+    board.innerText="Your Browser is'nt support canvas,please update your browser!";
+    if(board.getContext){
+      let context=board.getContext("2d");
+      // 设置透明度
+      context.fillStyle="red"
+      context.fillRect(0,0,200,200)
+      // context.globalAlpha=0.5;
+      // 设置新图形的覆盖方式
+      // 一. source:新图形覆盖旧图形
+      // 1. source-over: 默认值 新的覆盖旧的 全部保留
+      // 2. source-in  : 只绘制新图形和旧图形的重叠部分 其余全部透明
+      // 3. source-out : 只绘制新图形和旧图形的不重叠部分 其余全部透明
+      // 3. source-atop: 绘制新图形和旧图形的重叠部分 旧图形不受影响
+      // 二. destination :旧图形覆盖新图形
+      // 4. destination-over: 旧图覆盖新图
+      // 4. destination-in  : 只绘制新图形和旧图形的重叠部分 其余全部透明
+      // 4. destination-out : 只绘制新图形和旧图形的不重叠部分 其余全部透明
+      // 4. destination-atop: 绘制新图形和旧图形的重叠部分 旧图形不受影响
+      // 三. 
+      // lighter: 重叠部分像素值相加 是该部分更亮
+      // copy: 新图完全替换旧图
+      // xor: 重叠部分像素异或
+      context.globalCompositeOperation="xor";
+      context.fillStyle="blue"
+      context.fillRect(100,100,200,200)
+    }
+    document.body.appendChild(board);
+  </script>
+</body>
+</html>

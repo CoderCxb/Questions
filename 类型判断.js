@@ -12,6 +12,7 @@ console.log(typeof function () {}); // function
 console.log('------------------------------------------------------');
 
 // 2.Object.prototype.toString.call()
+// 缺点:无法判断类实例的类型 类实例返回[object Object]
 console.log(Object.prototype.toString.call(1)); // [object Number]
 console.log(Object.prototype.toString.call('str')); // [object String]
 console.log(Object.prototype.toString.call(true)); // [object Boolean]

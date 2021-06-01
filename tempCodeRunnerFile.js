@@ -1,1 +1,1 @@
-Promise.resolve(222)
+Promise.resolve(222);
