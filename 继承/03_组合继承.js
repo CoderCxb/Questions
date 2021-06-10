@@ -14,11 +14,12 @@ function SubType() {
 
 // SubType.prototype = new SuperType();
 // Object.setPrototypeOf(SubType.prototype, new SuperType());
-SubType.prototype.__proto__ = SuperType.prototype;
+// SubType.prototype.__proto__ = SuperType.prototype;
 // Object.setPrototypeOf(SubType.prototype, SuperType.prototype);
-// SubType.prototype=new SuperType()
+SubType.prototype=new SuperType()
 
 let s = new SubType();
+console.log(s);
 console.log(SubType.prototype);
 console.log(s.constructor);
 console.log(s instanceof SubType);

@@ -20,7 +20,8 @@ Function.prototype.myBind=function(context,...params1){
   // 4.由于bind不是调用的 因此需要返回一个函数 用于外界触发
   let func=function(...params2){
     // 5.如果this是self的实例 说明使用了new关键字 因此返回this 否则不变
-    context=this instanceof self?this:context;
+    // context=this instanceof self?this:context;
+    context=new.target?this:context;
     return context.fn(...params1,...params2);
   }
   // 6. 让return的函数的原型和原函数保持一致
