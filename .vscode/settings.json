@@ -1,3 +1,11 @@
 {
-  "code-runner.clearPreviousOutput": true
+  "code-runner.clearPreviousOutput": true,
+  "emmet.showAbbreviationSuggestions": false,
+  "emmet.excludeLanguages": [
+    "js",
+    "ts",
+    "tsx",
+    "jsx",
+    "markdown"
+  ]
 }
