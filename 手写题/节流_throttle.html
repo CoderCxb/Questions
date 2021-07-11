@@ -18,11 +18,6 @@
         function throttle(func, wait, options) {
             let timer,lastCallTime=0;
             throttled = function(e){
-            throttled.cancel = function() {
-                clearTimeout(timeout);
-                previous = 0;
-                timeout = undefined;
-            }
                 // 存储返回函数的this  以防止this在setTimeout中发生改变
                 let context=this;
                 // 获取当前时间
@@ -53,6 +48,11 @@
                         func.call(context,e)
                     },wait)
                 }
+            }
+            throttled.cancel = function() {
+                clearTimeout(timeout);
+                previous = 0;
+                timeout = undefined;
             }
             // 返回节流函数
             return throttled;

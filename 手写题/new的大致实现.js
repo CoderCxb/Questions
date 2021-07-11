@@ -15,12 +15,12 @@ function myNew() {
 	// 4.执行构造函数 接收返回值 根据返回值的不同 new返回的参数也不同
 	let ret = Constructor.apply(obj, arguments);
 	// 5.new的返回值 如果构造函数返回值为引用数据类型 则直接返回 如果不是 则返回obj
-	return typeof ret === 'object' ? ret : obj;
+	return  ret instanceof Object ? ret : obj;
 }
 
 function test() {
 	// new.target 如果使用了new关键字 则返回函数本身 否则undefined
-	console.log(new.target);
+	// console.log(new.target);
 	console.log(this);
 }
 test.prototype.xxx = 'xxx';
