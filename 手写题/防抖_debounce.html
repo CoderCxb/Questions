@@ -8,9 +8,8 @@
 <body>
   <div style="width: 500ppx;height: 500px;background: #000;" id="box"></div>
   <script>
-    // 注意:需要返回一个闭包，因为需要记录定时器
-    
     // 高频只能触发一次 要么延时前 要么延时后
+    // func 回调,  wait 时间间隔,   immediate是否立即执行
     function debounce(func,wait,immediate){
       // 定时器 写在外部 给return的闭包使用
       let timer;
@@ -26,11 +25,11 @@
           // 最重要的就在这 
           // 其实就是延时执行 但是执行的内容为空 并且会自动清空自己
           timer=setTimeout(function(){
-            // 需要情况timer 否则canNow会一直是false
+            // 需要清空timer 否则canNow会一直是false
             timer=undefined;
           },wait)
           // 立即执行
-          if(canNow) func.call(this,e)
+          if(canNow)func.call(this,e)
         }else{
           // 延时后执行
           timer=setTimeout(function(){
@@ -47,7 +46,7 @@
     }
     document.getElementById('box').onmousemove=debounce(function(){
       console.log('鼠标移动');
-    },1000,false)
+    },300,true)
   </script>
 </body>
 </html>

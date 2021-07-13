@@ -216,11 +216,6 @@ class MyPromise {
 	}
 }
 
-MyPromise.race([
-	MyPromise.reject('err'),
-	MyPromise.resolve('Hello')
-]).then(res=>{
-	console.log(res);
-}).catch(err=>{
-	console.log(err);
-})
+let p = new Promise((resolve)=>{
+	resolve(2)
+}).then(res=>{console.log(res);})

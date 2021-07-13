@@ -23,7 +23,6 @@ function SubType() {
 // 1. 无法传参给SuperType
 // 2. 父类属性和方法是绑定在原型上并且是共享的，属性共享其实不是很好
 SubType.prototype = new SuperType();
-// SubType.prototype=SuperType.prototype;
 
 SubType.prototype['getSubValue'] = function () {
 	console.log(this.sub);
@@ -33,7 +32,8 @@ let sub = new SubType();
 sub['getSuperValue']();
 sub.getSubValue();
 
-console.log(SubType.prototype);
-console.log(SuperType.prototype);
-console.log(sub instanceof SubType);
-console.log(sub instanceof SuperType);
+console.log(sub);  // SuperType { sub: '子' } 直接继承实例 导致类型有问题
+console.log(SubType.prototype);   // SuperType { sup: '父', getSubValue: [Function] }
+console.log(SuperType.prototype); // SuperType { getSuperValue: [Function] }
+console.log(sub instanceof SubType); // true
+console.log(sub instanceof SuperType); // true

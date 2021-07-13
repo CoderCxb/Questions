@@ -18,6 +18,7 @@ let obj2 = {
 };
 // 一、JSON.stringify()使用
 // 通过json的方式无法深拷贝方法
+// 由于JSON,stringify会忽略 undefined、函数、symbol，所以不能用来判断空对象
 // 1.可以通过replacer指定哪些属性需要序列化 数组的时候数组的值就是number了
 // 注意：如果该属性是一个数组 则还需要把该对象中需要序列化的属性也写上去
 // 如下 info中有type和source，以下写了type 但是没有source，所有source没有被序列化

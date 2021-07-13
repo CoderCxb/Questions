@@ -23,24 +23,27 @@ let shallowCopy = function (obj) {
 
 // 2.深拷贝
 var deepCopy = function (obj, map = new WeakMap()) {
-	// 此处不使用typeof 考虑到null的情况 如果不是对象 则直接返回原本的值
+	// 1. 若是基本数据类型 则直接返回
 	if (!(obj instanceof Object)) return obj;
-	// 如果obj是数组 则创建空数组
+	// 2. 若是正则表达式对象 则以相同的规则再生成一个
+	if (obj instanceof RegExp) return new RegExp(obj.source,obj.flags);
+	// 3. 若是Date对象
+	if (obj instanceof Date) return new Date(+obj);
+	// 4. 如果obj是数组 则创建空数组
 	// 如果obj不是数组 则创建一个对象 并且 将这个对象的原型指向原对象的原型
 	var newObj = obj instanceof Array ? [] : Object.create(obj.__proto__);
-	// 使用getOwnPropertyNames遍历 避免遍历到原型上的属性
-	// 也可以通过for(let key in obj) + if(obj.hasOwnProperty(key))遍历 避免访问原型属性
-
-	// 避免递归引用  使用map存储
+	// 5. 避免递归引用  使用map存储已经拷贝过的对象
 	if (map.get(obj)) {
 		return map.get(obj);
 	}
+	// 6. 存储obj和拷贝后的newObj
 	map.set(obj, newObj);
+	// 7. 使用getOwnPropertyNames遍历 避免遍历到原型上的属性
+	// 也可以通过for(let key in obj) + if(obj.hasOwnProperty(key))遍历 避免访问原型属性
 	for (var key of Object.getOwnPropertyNames(obj)) {
 		newObj[key] =
 			obj[key] instanceof Object ? deepCopy(obj[key], map) : obj[key];
 	}
-
 	return newObj;
 };
 

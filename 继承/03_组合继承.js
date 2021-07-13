@@ -12,9 +12,14 @@ function SubType() {
 	SuperType.call(this);
 }
 
+// SuperType的实例拿去赋值是比较差的选择 但是其他方式也都有问题 所以旧版本一般使用这种方式
 // SubType.prototype = new SuperType();
-// Object.setPrototypeOf(SubType.prototype, new SuperType());
+// Object.setPrototypeOf(SubType.prototype, new SuperType()); 
+
+// __proto__有兼容性问题
 // SubType.prototype.__proto__ = SuperType.prototype;
+
+// setPrototypeof 为ES6新增的语法 支持ES6语法时 是最佳解决方案
 // Object.setPrototypeOf(SubType.prototype, SuperType.prototype);
 SubType.prototype=new SuperType()
 

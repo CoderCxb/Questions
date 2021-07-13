@@ -6,15 +6,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
 </head>
-<style>
-  span{
-    color: red;
-  }
-</style>
 <body>
-  <div id="box">qwertyuiopasdhelloworlddnshttp</div>
   <script>
-    let xhr=new XMLHttpRequest();
+setTimeout(()=>{
+  console.log('!');
+},0)
+queueMicrotask(()=>{
+  console.log('xxx');
+})
+console.log('111');
+
   </script>
 </body>
 </html>
