@@ -1,7 +1,7 @@
 // 没有参数的时候的返回值
 // console.log(Math.max());  // -Infinity
 // console.log(Math.min());  // Infinity
-// console.log(Math.min()>Math.max()); // true
+console.log(Math.min()>Math.max()); // true
 
 // max和min无法接收数组 可以通过下面几种方式将数组传入
 // 1.循环传入

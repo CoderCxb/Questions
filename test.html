@@ -5,17 +5,38 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
+  <style>
+    *{
+      margin: 0;
+      padding: 0;
+    }
+    .box{
+      border: 2px solid red;
+    }
+    .clear::after{
+      content: "\0020";
+      display: block;
+      height: 0;
+      clear: both;
+    }
+    .box1{
+      width: 100px;
+      height: 100px;
+      float: left;
+      background-color: blue;
+    }
+    .box2{
+      width: 100px;
+      height: 100px;
+      float: left;
+      background-color: yellow;
+    }
+  </style>
 </head>
 <body>
-  <script>
-setTimeout(()=>{
-  console.log('!');
-},0)
-queueMicrotask(()=>{
-  console.log('xxx');
-})
-console.log('111');
-
-  </script>
+  <div class="box clear">
+    <div class="box1"></div>
+    <div class="box2"></div>
+  </div>
 </body>
 </html>
