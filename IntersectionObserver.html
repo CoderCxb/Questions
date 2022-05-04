@@ -22,7 +22,7 @@
     // 创建实例
     // 注意:不兼容IE，但是官方提供polyfill做兼容
     let observer=new IntersectionObserver(function(entries,ob){
-      // 1. entries是一个数组，存放的是触发的元素情况(初始化时 会全部触发)
+      // 1. entries是一个数组，存放的是触发的元素情况
       // time: 3893.92, // 可见性发生变化的时间，是一个高精度时间戳，单位为毫秒
       // target: element , // 被观察的目标元素，是一个 DOM 节点对象
 
@@ -36,7 +36,7 @@
       // intersectionRect: ClientRect {},
       // isIntersecting: true,     // 从交叉到非交叉为false，其余情况为true，初始情况下，在页面上为true，不在页面为false
       // intersectionRatio: 0.54,  // 目标元素的可见比例 0的时候说明不可见 1完全可见
-      console.log(entries,ob);
+      console.log(entries, ob);
     },{
       root:document.getElementById('box'),
       rootMargin:'0px 0px 0px 0px',

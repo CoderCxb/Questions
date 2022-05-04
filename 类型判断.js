@@ -2,7 +2,7 @@
 console.log(typeof 1); // number
 console.log(typeof 'str'); // string
 console.log(typeof true); // boolean
-console.log(typeof null); // object
+console.log(typeof null); // object, 不合理
 console.log(typeof undefined); // undefined
 console.log(typeof {}); // object
 console.log(typeof []); // array
