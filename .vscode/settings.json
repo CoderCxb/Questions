@@ -8,5 +8,6 @@
     "jsx",
     "markdown"
   ],
-  "editor.suggest.snippetsPreventQuickSuggestions": false
+  "editor.suggest.snippetsPreventQuickSuggestions": false,
+  "liveServer.settings.port": 5502
 }

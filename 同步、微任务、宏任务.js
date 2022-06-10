@@ -11,6 +11,9 @@ Promise.resolve()
     Promise.resolve().then(function(){
       console.log('nested promise')
     })
+    setTimeout(() => {
+      console.log('setTimeout');
+    }, 0);
   })
   .then(function () {
     console.log('promise2');
@@ -30,4 +33,15 @@ console.log('script end');
 // script end
 // promise1
 // promise2
+// setTimeout
+
+
+
+// script start
+// script end
+// promise1
+// nested promise
+// promise2
+// promise3
+// setTimeout
 // setTimeout

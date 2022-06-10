@@ -5,6 +5,7 @@ function SuperType() {
 }
 
 function SubType() {
+	// 这个相当于super
 	SuperType.call(this);
 	this.sub = 'Sub Value';
 }

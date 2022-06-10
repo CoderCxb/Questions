@@ -1,6 +1,3 @@
-function curry(fn){
-  let argsList = [];
-  function judge(){
-    
-  }
-}
+let worker = new Worker('./test.mjs');
+
+worker.postMessage('xxxx');

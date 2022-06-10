@@ -159,6 +159,14 @@ class MyPromise {
   catch(onRejected) {
     return this.then(undefined, onRejected);
   }
+  
+  finally(callback) {
+    const finallyCallback = (value) => {
+      callback();
+      return value
+    }
+    return this.then(finallyCallback, finallyCallback)
+  }
 
   // Promise.all 接收promise数组,如果全部resolve,则返回结果,只要有一个失败,则reject
   // 返回值是一个Promise
@@ -169,36 +177,76 @@ class MyPromise {
       // 2. promise数组为空 直接返回[]作为结果
       if (promises.length === 0) resolve(result);
       // 3. 遍历promise数组
-      promises.forEach((promise) => {
+      for(let promise of promises) {
         // 4. 如果是promise,则直接使用,否则使用Promise.resove包装成Promise
-        promise =
-          promise instanceof MyPromise ? promise : MyPromise.resolve(promise);
-        // 5. 注意点来了 同步定义then和catch 因为如果是.then.catch 那么catch就是在第二层的微任务队列 会导致catch晚一轮输出结果
+        promise = promise instanceof MyPromise ? promise : MyPromise.resolve(promise);
         promise.then((res) => {
-          result.push(res);
+          result.push(res)
           if (result.length === promises.length) {
             resolve(result);
           }
-        });
-        promise.catch((err) => {
+        }).catch((err) => {
           reject(err);
         });
+      };
+    });
+  }
+
+  // Promise.race 接收promise数组, 只要有一个状态发生改变,就返回该promise的结果
+  static race(promises) {
+    return new MyPromise((resolve, reject) => {
+      promises.forEach((promise) => {
+        promise = promise instanceof MyPromise ? promise : MyPromise.resolve(promise);
+        promise.then((res) => {
+          resolve(res);
+        }).catch(reject);
       });
     });
   }
 
-  static race(promises) {
+
+  // Promise.any接收promise数组, 若有一个成功则返回该结果,如果全部失败, 返回失败的promise
+  static any(promises) {
+    let errCount = 0;
     return new MyPromise((resolve, reject) => {
       promises.forEach((promise) => {
-        promise =
-          promise instanceof MyPromise ? promise : MyPromise.resolve(promise);
+        promise = promise instanceof MyPromise ? promise : MyPromise.resolve(promise);
         promise.then((res) => {
-          resolve(res);
-        });
-        promise.catch((err) => {
-          reject(err);
+          resolve(res)
+        }).catch(() => {
+          errCount++;
+          if(errCount === promises.length) {
+            reject(new Error('All Rejected'))
+          }
         });
       });
+    })
+  }
+
+  static allSettled(promises){
+    return new MyPromise((resolve, reject) => {
+      // 1. 使用数组 存储结果
+      let result = [];
+      // 2. promise数组为空 直接返回[]作为结果
+      if (promises.length === 0) resolve(result);
+      // 3. 遍历promise数组
+      for(let promise of promises) {
+        // 4. 如果是promise,则直接使用,否则使用Promise.resove包装成Promise
+        promise = promise instanceof MyPromise ? promise : MyPromise.resolve(promise);
+        promise.then((res) => {
+          result.push({
+            status: 'fulfilled',
+            value: res
+          })
+          if (result.length === promises.length) resolve(result);
+        }).catch((err) => {
+          result.push({
+            status: 'rejected',
+            reason: err
+          });
+          if (result.length === promises.length) resolve(result);
+        });
+      };
     });
   }
 
@@ -215,13 +263,69 @@ class MyPromise {
   }
 }
 
-let p = new MyPromise((resolve) => {
-  resolve("111");
+// let p = new MyPromise((resolve) => {
+//   resolve("111");
+// })
+//   .then((res) => {
+//     console.log(res);
+//     return "222";
+//   })
+//   .then((res) => {
+//     console.log(res);
+//   });
+
+
+// MyPromise.all([
+//   new MyPromise((resolve)=>{
+//     setTimeout(() => {
+//       resolve('xxxx')
+//     }, 1000);
+//   }),
+//   MyPromise.resolve('aaa'),
+//   MyPromise.resolve('bbb'),
+// ]).then(res=>{
+//   console.log('res', res);
+// }).catch(err=>{
+//   console.log('err', err);
+// });
+
+
+// MyPromise.race([
+//   new MyPromise((resolve)=>{
+//     setTimeout(() => {
+//       resolve('setTimeout 1000');
+//     }, 1000);
+//   }),
+//   MyPromise.reject('aaa'),
+// ]).then(res=>{
+//   console.log('res', res);
+// }).catch(err=>{
+//   console.log('err', err);
+// });
+
+
+// MyPromise.any([
+//   MyPromise.reject('e1'),
+//   MyPromise.reject('e2'),
+// ]).then(res=>{
+//   console.log('res', res);
+// }).catch(err=>{
+//   console.log('err', err);
+// })
+
+// MyPromise.allSettled([
+//   MyPromise.resolve('1'),
+//   MyPromise.reject('2')
+// ]).then(res=>{
+//   console.log('res', res);
+// }).catch(err=>{
+//   console.log('err', err);
+// })
+
+Promise.reject('xxx').then(res=>{
+  console.log('res',res);
+}).finally(()=>{
+  console.log('finally');
+}).catch(res=>{
+  console.log('res', res);
 })
-  .then((res) => {
-    console.log(res);
-    return "222";
-  })
-  .then((res) => {
-    console.log(res);
-  });

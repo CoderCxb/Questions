@@ -25,27 +25,35 @@
 // 大表哥
 // [表情]￼
 
-class LazyMan{
+// class LazyMan{
+//   delayTime = 0;
+//   name;
+//   constructor(name){
+//     this.name=name;
+//     console.log(`Hi This is ${this.name}`);
+//   }
 
-  delayTime = 0;
-  name;
-  constructor(name){
-    this.name=name;
-    console.log(`Hi This is ${this.name}`);
-  }
+//   sleep(delay){
+//     this.delayTime += delay * 1000 ;
+//     return this;
+//   }
 
-  sleep(delay){
-    this.delayTime += delay * 1000 ;
-    return this;
-  }
+//   eat(value){
+//     setTimeout(()=>{
+//       console.log(`Wake up after ${value}`);
+//       console.log(`Eat ${value}`);
+//     },this.delayTime);
+//     return this;
+//   }
+// }
 
-  eat(value){
-    setTimeout(()=>{
-      console.log(`Wake up after ${value}`);
-      console.log(`Eat ${value}`);
-    },this.delayTime);
-    return this;
-  }
+// new LazyMan("Hank").sleep(5).eat("dinner").sleep(5).eat('Supper');
+
+
+function sleep (delay){
+  for(let d = new Date(); new Date() - d < delay;){}
 }
 
-new LazyMan("Hank").sleep(5).eat("dinner").sleep(5).eat('Supper');
+sleep(5000);
+console.log('over');
+

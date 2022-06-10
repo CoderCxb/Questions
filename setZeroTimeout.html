@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    div{
+      background: hsla(0, 0%, 0%, 0.25);
+    }
+    
+  </style>
+  </head>
+  <body>
+    <script>
+      (function() {
+        var timeout = null;
+        var messageName = "zero-timeout";
+        function setZeroTimeout(fn) {
+          timeout = fn;
+            window.postMessage(messageName, "*");
+        }
+
+        function handleMessage(event) {
+            if (event.source == window && event.data == messageName) {
+                event.stopPropagation();
+                if (timeout) {
+                  timeout();
+                }
+            }
+        }
+
+        window.addEventListener("message", handleMessage, true);
+
+        window.setZeroTimeout = setZeroTimeout;
+      })();
+      setTimeout(() => {
+        console.log('setTimeout');
+      }, 0);
+      setZeroTimeout(function(){
+        console.log('zero');
+      })
+      setZeroTimeout(function(){
+        console.log('zero');
+      })
+      Promise.resolve().then(()=>{console.log('Promise');})
+    </script>
+  </body>
+</html>

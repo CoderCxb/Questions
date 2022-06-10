@@ -79,11 +79,6 @@ function JSS(obj, keyArr) {
 // 	)
 // );
 
-let obj={
-	[Symbol.](){
-		return undefined;
-	}
-}
 
 console.log(JSS([1, 2, { a: null, b: undefined, c: true, d: 111 }]));
-console.log(JSON.stringify([1, 2, { a: null, b: undefined, c: true, d: 111,e:()=>{},r:obj}]));
+console.log(JSON.stringify([1, 2, { a: null, b: undefined, c: true, d: 111,e:()=>{}}]));
