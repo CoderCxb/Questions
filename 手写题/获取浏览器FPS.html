@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>获取浏览器的FPS</title>
+</head>
+<body>
+  <script>
+    function getFPS(){
+      return new Promise((resolve, reject)=>{
+        let frame = 0;
+        let timer = null;
+        let deadline = +new Date() + 1000;
+        function loopRAF(){
+          // 注意: 当requestAnimationFrame() 运行在后台标签页或者隐藏的<iframe> 里时，requestAnimationFrame() 会被暂停调用以提升性能和电池寿命
+          timer = requestAnimationFrame(()=>{
+            frame++;
+            if(+new Date() >= deadline){
+              resolve(frame);
+              cancelAnimationFrame(timer);
+            }
+            loopRAF();
+          })
+        }
+        loopRAF();
+      })
+    }
+    setInterval(() => {
+      getFPS().then(frame=>{
+        console.log('frame', frame);
+      }).catch(err=>{
+        console.log('err', err);
+      })
+    }, 1000);
+  </script>
+</body>
+</html>

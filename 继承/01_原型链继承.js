@@ -35,5 +35,5 @@ sub.getSubValue();
 console.log(sub);  // SuperType { sub: '子' } 直接继承实例 导致类型有问题
 console.log(SubType.prototype);   // SuperType { sup: '父', getSubValue: [Function] }
 console.log(SuperType.prototype); // SuperType { getSuperValue: [Function] }
-console.log(sub instanceof SubType); // true
+console.log(sub instanceof SubType);   // true
 console.log(sub instanceof SuperType); // true

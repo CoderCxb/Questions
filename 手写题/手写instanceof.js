@@ -22,3 +22,4 @@ function myInstanceOf(instance, constructor) {
 
 console.log(myInstanceOf({}, Object));
 console.log(myInstanceOf(function () {}, Function));
+

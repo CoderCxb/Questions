@@ -3,7 +3,7 @@ let s2 = s1.slice(0, 5);
 // 本身string是原始值 不应该有方法 但是后台做了很多操作
 // 1.创建一个String类型的实例：
 // let s1 = new String('Hello World');
-// let s2=s1.slice(0,5);
+// let s2 = s1.slice(0,5);
 // s1 = null;
 
 // 个人理解 可以看作

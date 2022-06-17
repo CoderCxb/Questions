@@ -25,3 +25,4 @@ console.log(obj2);
 
 // 3. 原型模式
 
+

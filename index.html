@@ -5,20 +5,23 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
-  <style>
-  </style>
+  <script src="http://cdn.staticfile.org/moment.js/2.24.0/moment.min.js"></script>
   </head>
+  <style>
+    .top{
+      width: 300px;
+      height: 300px;
+      background: yellow;
+      display: grid;
+      /* align-items: center;
+      justify-content: center; */
+    }
+  </style>
   <body>
-    <div id="outter">out
-      <div id="inner">in</div>
+    <div>
+      <div class="top">
+        xxxx
+      </div>
     </div>
-    <script>  
-    document.getElementById('outter').onclick = function(e){
-      console.log('target', e.target, 'currentTarget', e.currentTarget);
-    }
-    document.getElementById('inner').onclick = function(e){
-      console.log('target', e.target, 'currentTarget', e.currentTarget);
-    }
-    </script>
   </body>
 </html>

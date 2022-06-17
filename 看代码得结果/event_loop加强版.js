@@ -53,3 +53,20 @@ new Promise(function(resolve) {
 })
 
 console.log('sync end');
+
+// sync start
+// promise
+// for
+// promise2
+// sync end
+// resolve1
+// asyncFn2 start
+// asyncFn1
+// resolve3
+// asyncFn1 promise
+// asyncFn2 end
+// resolve2
+// setTimeout1
+// promise0
+// setTimeout promise resolved
+// setTimeout2
