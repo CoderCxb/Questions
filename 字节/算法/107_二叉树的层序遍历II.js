@@ -25,27 +25,29 @@ function TreeNode(val, left, right) {
  * @param {TreeNode} root
  * @return {number[][]}
 */
-var levelOrder = function (root) {
+var levelOrderBottom = function (root) {
   let res = [];
   if(!root) return res;
   let levelNodeArr = [root];
-  while(levelNodeArr.length){
-    for(let i = 0;i<levelNodeArr.length;i++){
-      let values = [];
-      let node = levelNodeArr.shift();
-      if(node.left) levelNodeArr.push(node.left);
-      if(node.right) levelNodeArr.push(node.right);
-      values.push(node.val)
-      console.log(values);
+  while(levelNodeArr.length > 0){
+    let values = [];
+    let children = [];
+    for(let i = 0;i < levelNodeArr.length; i++){
+      let node = levelNodeArr[i];
+      values.push(node.val);
+      if(node.left) children.push(node.left)
+      if(node.right) children.push(node.right)
     }
+    levelNodeArr = children;
+    res.unshift(values)
   }
   return res;
 }
 
  let root = new TreeNode(
 	1,
-	new TreeNode(2, new TreeNode(3, null, null), null),
-	new TreeNode(2, new TreeNode(3, null, null), null)
+	new TreeNode(9, null, null),
+	new TreeNode(20, new TreeNode(15, null, null), new TreeNode(7, null,null))
 );
 
-console.log(levelOrder(root));
+console.log(levelOrderBottom(root));

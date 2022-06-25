@@ -25,3 +25,45 @@
 // 解释：相交节点的值为 8 （注意，如果两个链表相交则不能为 0）。
 // 从各自的表头开始算起，链表 A 为 [4,1,8,4,5]，链表 B 为 [5,6,1,8,4,5]。
 // 在 A 中，相交节点前有 2 个节点；在 B 中，相交节点前有 3 个节点。
+
+
+function ListNode(val) {
+  this.val = val;
+  this.next = null;
+}
+
+/**
+ * @param {ListNode} headA
+ * @param {ListNode} headB
+ * @return {ListNode}
+ */
+var getIntersectionNode = function(headA, headB) {
+  let a = headA;
+  let b = headB;
+  while(a !== b){
+    a = a === null ? headB : a.next;
+    b = b === null ? headA : b.next;
+  }
+  return a;
+};
+
+  
+let publicList = new ListNode(7);
+publicList.next = new ListNode(8);
+publicList.next.next = new ListNode(9);
+publicList.next.next.next = new ListNode(10);
+
+let l1 = new ListNode(1);
+l1.next = new ListNode(3);
+l1.next.next = publicList;
+
+let l2 = new ListNode(2);
+l2.next = new ListNode(4);
+l2.next.next = new ListNode(6);
+l2.next.next.next = publicList;
+
+console.log(getIntersectionNode(l1, l2));
+console.log(getIntersectionNode(new ListNode(1), new ListNode(2)));
+
+
+
