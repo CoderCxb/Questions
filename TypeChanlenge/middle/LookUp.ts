@@ -13,9 +13,6 @@ interface Dog {
   color: 'brown' | 'white' | 'black'
 }
 
-type LookUp<U, T extends string> = {
-  // 想要获取某个属性值为指定值的,可以让他extends { Key: Value }
-  [K in T]: U extends { type: K } ? U : never 
-}[T]
+type LookUp<T extends { type: string }, U> = T extends { type: U } ? T : never;
 
 type MyDog = LookUp<Cat | Dog, 'dog'> // expected to be `Dog`

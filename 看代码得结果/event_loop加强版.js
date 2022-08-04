@@ -69,4 +69,4 @@ console.log('sync end');
 // setTimeout1
 // promise0
 // setTimeout promise resolved
-// setTimeout2
+// setTimeout2JS/单例内置对象.html

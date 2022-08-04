@@ -29,13 +29,13 @@ var deepCopy = function (obj, map = new WeakMap()) {
 	if (obj instanceof RegExp) return new RegExp(obj.source,obj.flags);
 	// 3. 若是Date对象
 	if (obj instanceof Date) return new Date(+obj);
-	// 4. 如果obj是数组 则创建空数组
-	// 如果obj不是数组 则创建一个对象 并且 将这个对象的原型指向原对象的原型
-	var newObj = obj instanceof Array ? [] : Object.create(obj.__proto__);
-	// 5. 避免递归调用  使用map存储已经拷贝过的对象
+	// 4. 避免递归调用  使用map存储已经拷贝过的对象
 	if (map.get(obj)) {
 		return map.get(obj);
 	}
+	// 5. 如果obj是数组 则创建空数组
+	// 如果obj不是数组 则创建一个对象 并且 将这个对象的原型指向原对象的原型
+	var newObj = obj instanceof Array ? [] : Object.create(obj.__proto__);
 	// 6. 存储obj和拷贝后的newObj
 	map.set(obj, newObj);
 	// 7. 使用getOwnPropertyNames遍历 避免遍历到原型上的属性

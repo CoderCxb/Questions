@@ -17,5 +17,18 @@
       b. 只有网络错误才会reject, 404和500不会被reject
       c. 不支持取消请求和查看请求进度
    -->
+   <script>
+      let controller = new AbortController();
+      let { signal } = controller;
+      // 发送请求
+      fetch('url', {
+        signal
+      }).catch(err=>{
+        console.log(err);
+      })
+
+      // 通过controller取消
+      controller.abort();
+   </script>
 </body>
 </html>

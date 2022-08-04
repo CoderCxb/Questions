@@ -6,7 +6,7 @@ type Replace<S, From extends string, To extends string> =
     : S extends `${infer L}${From}${infer R}` 
       // `${L}${To}${R}`已经是替换后的字符串了,继续使用Replace替换直到无法From无法匹配
       // ${L}不需要继续比较,直接拼接
-      ? `${L}${Replace<`${To}${R}`, From ,To>}`
+      ? `${L}${To}${R}`
       : S;
 
 

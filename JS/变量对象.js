@@ -2,7 +2,7 @@
 // 1.浏览器环境中 this指向window
 console.log(this===module.exports);
 // 2.node环境中 this指向module.export 而全局对象是globalThis
-value='node环境中globalThis是全局变量';
+value = 'node环境中globalThis是全局变量';
 console.log(globalThis.value);
 
 

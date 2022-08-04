@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>请求重试</title>
+</head>
+<body>
+  <script>
+    // 请求重试
+    function retryAdapterEnhancer(options) {
+      // 超时时间和重试次数由外部确定
+      let { times = 3, delay = 3000 } = options;
+      return async () => {
+        let request = async ()=> {
+          if(times <= 0) return Promise.reject('Error');
+          try {
+            const ac = new AbortController()
+            const { signal } = ac;
+            setTimeout(() => {
+              ac.abort();
+            }, 1000);
+            return await fetch('http://www.baidu.com',{
+              signal
+            });
+          }catch(err){
+            console.log('err:',err);
+            times --;
+            return await Promise.resolve().then(async ()=>{
+              return await request()
+            });
+          }
+          
+        };
+        return await request();
+      };
+    }
+
+    console.log(retryAdapterEnhancer({
+      times: 3,
+      delay: 1
+    })());
+  </script>
+</body>
+</html>
+
+
+<!-- return await new Promise((resolve,reject)=>{
+  // setTimeout(() => {
+  //   reject('超时');
+  // }, delay);
+  .then((res=>{
+    resolve(res);
+  })).catch((error)=>{
+    reject(error);
+  })
+}); -->

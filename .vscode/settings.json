@@ -9,5 +9,7 @@
     "markdown"
   ],
   "editor.suggest.snippetsPreventQuickSuggestions": false,
-  "liveServer.settings.port": 5502
+  "liveServer.settings.port": 5502,
+  "auto-close-tag.enableAutoCloseSelfClosingTag": false,
+  "auto-close-tag.enableAutoCloseTag": false
 }

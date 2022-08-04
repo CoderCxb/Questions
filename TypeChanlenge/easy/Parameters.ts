@@ -1,5 +1,4 @@
-type MyParameters<T extends (...args: any)=>any> = 
-  T extends (...args: infer P) => any ? P : never;
+type MyParameters<T> = T extends (...args: infer R)=> any ? R : never
 
 type fn = (name:string, age:number) => void;
 
