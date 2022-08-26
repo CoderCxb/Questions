@@ -1,3 +1,4 @@
+// 字符串首字母大写
 type CapitalizeMap = {
   a: 'A',
   b: 'B',

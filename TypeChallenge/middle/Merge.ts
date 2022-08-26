@@ -1,3 +1,5 @@
+// 对象合并, 如果属性重复,后一个会覆盖前一个
+
 type foo = {
   name: string;
   age: string;

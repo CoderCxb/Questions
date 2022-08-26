@@ -1,3 +1,5 @@
+// 定义类型DeepReadonly<T>接收一个泛型(引用数据类型), 将这个泛型变成完全可读, 即嵌套的对象也无法修改
+
 // type DeepReadonly<T> = {
 //   readonly [K in keyof T]: DeepReadonly<T[K]>;
 // };

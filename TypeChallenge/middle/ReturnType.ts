@@ -1,3 +1,4 @@
+// 获取返回值类型
 const fn = (v: boolean) => {
   if (v) return 1;
   else return 2;

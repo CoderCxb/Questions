@@ -1,3 +1,7 @@
+// Implement a type that adds a new field to the interface. The type takes the three arguments. The output should be an object with the new field.
+
+// AppendToObject<T,K,V> 接收3个泛型, T是对象类型, K是key, V是value, 将key和value添加到对象中
+
 type Test = { id: '1' }
 
 

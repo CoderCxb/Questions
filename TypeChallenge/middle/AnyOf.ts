@@ -1,3 +1,6 @@
+// A type takes the Array and returns true if any element of the Array is true. If the Array is empty, return false.
+// 说白话就是: 包含假值、空数组以及空对象时返回false
+
 // 假值
 type Falsy = '' | false | null | undefined | 0 | [] | Record<any, never>;
 

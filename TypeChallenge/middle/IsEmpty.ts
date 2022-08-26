@@ -1,3 +1,4 @@
+// 判断是否为空数组或者空对象 
 type IsEmpty<T extends any[] | {}> = 
   T extends any[] 
     ? T['length'] extends 0 
