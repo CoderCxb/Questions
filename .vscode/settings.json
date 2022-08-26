@@ -11,5 +11,6 @@
   "editor.suggest.snippetsPreventQuickSuggestions": false,
   "liveServer.settings.port": 5502,
   "auto-close-tag.enableAutoCloseSelfClosingTag": false,
-  "auto-close-tag.enableAutoCloseTag": false
+  "auto-close-tag.enableAutoCloseTag": false,
+  "editor.tabSize": 2
 }

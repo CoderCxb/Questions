@@ -16,6 +16,16 @@ const obj = {
   }
 }
 
+const res = {
+  '1': { 
+    text: '1', 
+    children: { 
+      '1': { text: '1-1', children: { '1': { text: '1-1-1', children: {} } } }, 
+      '2': { text: '1-2', children: {} }
+    } 
+  },
+  '3': { children: { '3': { children: { '3': { text: '3-3-3', children: {} } } } } }
+}
 
 function stackUp(obj){
   let res = {};
@@ -47,4 +57,4 @@ function stackUp(obj){
 }
 
 
-console.log(stackUp(obj)['3']);
+console.log(stackUp(obj)['3']['children']['3']);
