@@ -91,3 +91,24 @@ type PickByType<R extends Record<any,any>, T extends any> = {
   [K in keyof R as R[K] extends T ? K : never]: R[K]
 };
 ```
+
+###### &的小技巧
+```ts
+// 以下例子虽然会报错,但是类似还是能够正常推导出来
+// 当有时候类型过大无法满足要求
+type Test<T extends any> = `${T}`;
+
+// 或者infer出来的类型不合适时
+type Test2<T extends any[]> = T extends [infer L, ...infer R] ? `${L}` : T;
+
+// 解决报错
+// 可以使用&来联合其他类型以达到目标效果
+type Test<T extends any> = `${T & string}`;
+type Test2<T extends any[]> = T extends [infer L, ...infer R] ? `${L & string}` : T;
+```
+
+
+###### 判断类型是否相等
+```ts
+type Equals<X, Y> = (<T>() => T extends X ? 1 : 2) extends <T>() => T extends Y ? 1 : 2 ? true : false;
+```

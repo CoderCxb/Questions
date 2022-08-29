@@ -11,3 +11,6 @@ type res1 = Pop<arr1> // expected to be ['a', 'b', 'c']
 type res3 = Shift<res1> // expected to be ['b', 'c']
 type res4 = Unshift<res3, 'd'> // expected to be ['d', 'b', 'c']
 type res5 = Push<res4, 'e'> // expected to be ['d', 'b', 'c', 'e']
+
+
+export {};
